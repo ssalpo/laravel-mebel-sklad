@@ -12,7 +12,7 @@
             </button>
         </template>
 
-        <div class="input-group mb-3">
+        <div class="input-group">
             <AirDatePicker
                 :as-modal="isMobile"
                 v-model="form.start"
@@ -25,12 +25,6 @@
                 placeholder="Дата конечная"
             />
         </div>
-
-        <SelectSuppliers
-            auto-position
-            v-model="form.supplier"
-            :invalid-text="form.errors.supplier"
-        />
 
         <template #footer="{hide}">
             <button :disabled="form.processing" class="btn btn-primary">
@@ -68,7 +62,6 @@ export default {
             form: useForm({
                 start: null,
                 end: null,
-                supplier: null
             })
         }
     },

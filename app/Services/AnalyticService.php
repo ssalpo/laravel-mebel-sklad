@@ -50,10 +50,6 @@ class AnalyticService
                 fn($q) => $q->on('o.id', '=', 'o_i.order_id')
                     ->where('o.status', $status)
                     ->when(
-                        Arr::get($this->filters, 'supplier'),
-                        fn($q, $v) => $q->where('o.supplier_id', $v)
-                    )
-                    ->when(
                         Arr::get($this->filters, 'client'),
                         fn($q, $v) => $q->where('o.client_id', $v)
                     )

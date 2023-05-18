@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="col col-sm-6 offset-sm-3 mb-3">
-                    <TextInput
+                    <NumericField
                         label="Себестоимость"
                         label-required
                         placeholder="Введите сумму себестоимости"
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="col col-sm-6 offset-sm-3 mb-3">
-                    <TextInput
+                    <NumericField
                         label="Цена продажи"
                         label-required
                         placeholder="Введите цену продажи"
@@ -53,9 +53,10 @@ import Card from "../../Shared/Card.vue";
 import TextInput from "../../Shared/Form/TextInput.vue";
 import {useForm, Link} from "@inertiajs/inertia-vue3";
 import SelectNomenclatures from "../../Shared/Form/SelectNomenclatures.vue";
+import NumericField from "../../Shared/Form/NumericField.vue";
 
 export default {
-    components: {SelectNomenclatures, TextInput, Card, PageWrapper, Link},
+    components: {NumericField, SelectNomenclatures, TextInput, Card, PageWrapper, Link},
     props: ['nomenclature'],
     data() {
         return {
