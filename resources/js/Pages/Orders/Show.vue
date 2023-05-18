@@ -7,13 +7,18 @@
             <div class="table-responsive">
                 <table class="table table-vcenter text-nowrap card-table">
                     <tbody>
-                        <tr v-if="suppliersCount">
-                            <td width="150" class="text-start text-sm-end fw-bold">Поставщик</td>
-                            <td>{{order.supplier?.name || '-'}}</td>
-                        </tr>
                         <tr>
                             <td class="text-start text-sm-end fw-bold">Клиент</td>
-                            <td>{{order.client?.name || '-'}}</td>
+                            <td>
+                                <div>{{order.client?.name || '-'}}</div>
+                                <div v-if="order.client?.phone" class="mt-2">
+                                    <a :href="`tel:${order.client.phone}`">{{order.client.phone}}</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-start text-sm-end fw-bold">Адрес</td>
+                            <td>{{order.address}}</td>
                         </tr>
                         <tr>
                             <td class="text-start text-sm-end fw-bold">
@@ -85,7 +90,7 @@ import OrderCancelModal from "../../Shared/Modals/OrderCancelModal.vue";
 
 export default {
     components: {OrderCancelModal, Card, PageWrapper, Link},
-    props: ['order', 'suppliersCount', 'shared'],
+    props: ['order', 'shared'],
     methods: {
         numberFormat
     }

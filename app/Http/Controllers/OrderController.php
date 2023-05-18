@@ -6,12 +6,9 @@ use App\Http\Requests\OrderCancelRequest;
 use App\Http\Requests\OrderRequest;
 use App\Models\Nomenclature;
 use App\Models\Order;
-use App\Models\Supplier;
 use App\Services\OrderService;
 use App\Services\Toast;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
 {
@@ -23,15 +20,13 @@ class OrderController extends Controller
 
     public function index()
     {
-        $suppliersCount = Supplier::count();
-
-        $orders = Order::with(['client', 'supplier'])
+        $orders = Order::with(['client'])
             ->filter(request()?->all())
             ->orderBy('created_at', 'DESC')
             ->paginate()
             ->onEachSide(0);
 
-        return inertia('Orders/Index', compact('orders', 'suppliersCount'));
+        return inertia('Orders/Index', compact('orders'));
     }
 
     public function create()
@@ -47,9 +42,7 @@ class OrderController extends Controller
                 ]
             );
 
-        $suppliersCount = Supplier::count();
-
-        return inertia('Orders/Edit', compact('nomenclatures', 'suppliersCount'));
+        return inertia('Orders/Edit', compact('nomenclatures'));
     }
 
     public function store(OrderRequest $request)
@@ -61,11 +54,9 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->load(['client', 'supplier', 'orderItems.nomenclature']);
+        $order->load(['client', 'orderItems.nomenclature']);
 
-        $suppliersCount = Supplier::count();
-
-        return inertia('Orders/Show', compact('suppliersCount', 'order'));
+        return inertia('Orders/Show', compact('order'));
     }
 
     public function cancel(OrderCancelRequest $request, int $orderId): RedirectResponse

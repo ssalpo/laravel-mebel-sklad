@@ -15,12 +15,13 @@
                     <NewClientModal @success="setClient" />
                 </div>
 
-                <div class="col col-sm-6 offset-sm-3 mb-3" v-if="suppliersCount > 1">
-                    <SelectSuppliers
-                        v-model="form.supplier_id"
+                <div class="col col-sm-6 offset-sm-3 mb-3">
+                    <TextInput
+                        label="Адрес доставки"
                         label-required
-                        :invalid-text="form.errors.supplier_id"
-                        label="Поставщик"
+                        placeholder="Введите адрес доставки"
+                        v-model="form.address"
+                        :invalid-text="form.errors.address"
                     />
                 </div>
 
@@ -93,17 +94,15 @@ import map from "lodash/map";
 import {numberFormat} from "../../functions";
 import SelectClients from "../../Shared/Form/SelectClients.vue";
 import OrderNomenclatures from "../../Shared/Form/OrderNomenclatures.vue";
-import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
 import NewClientModal from "../../Shared/Modals/NewClientModal.vue";
 import BarcodeScannerModal from "../../Shared/Modals/BarcodeScannerModal.vue";
 import find from "lodash/find";
 
 export default {
-    props: ['nomenclatures', 'suppliersCount'],
+    props: ['nomenclatures'],
     components: {
         BarcodeScannerModal,
         NewClientModal,
-        SelectSuppliers,
         OrderNomenclatures,
         SelectClients,
         NumericField,
@@ -116,8 +115,8 @@ export default {
     data() {
         return {
             form: useForm({
-                supplier_id: null,
                 client_id: null,
+                address: null,
                 orderItems: []
             })
         }

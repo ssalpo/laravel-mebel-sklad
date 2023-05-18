@@ -4,10 +4,8 @@ namespace App\Services;
 
 use App\Models\Nomenclature;
 use App\Models\Order;
-use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Collection as ModelCollection;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class OrderService
@@ -21,10 +19,6 @@ class OrderService
             )->get();
 
             $totals = $this->calculateTotals($data, $nomenclatures);
-
-            if (Supplier::count() <= 1) {
-                $data['supplier_id'] = Supplier::latest()->first()?->id;
-            }
 
             $order = Order::create(array_merge(
                 [

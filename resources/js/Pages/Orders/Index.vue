@@ -13,17 +13,13 @@
             </Link>
         </template>
 
-        <OrdersIndexMobile
-            v-if="isMobile"
-            :orders="orders"
-            :suppliers-count="suppliersCount"
-        />
+        <card  card-body-class="px-3">
+            <OrderItems :orders="orders.data" />
 
-        <OrdersIndexDesktop
-            v-else
-            :orders="orders"
-            :suppliers-count="suppliersCount"
-        />
+            <template #cardFooter v-if="orders.links.length > 3">
+                <Pagination class="float-end" :links="orders.links"/>
+            </template>
+        </card>
 
     </PageWrapper>
 </template>
@@ -34,19 +30,19 @@ import {Link} from "@inertiajs/inertia-vue3";
 import {IconCirclePlus} from "@tabler/icons-vue";
 import OrderFilters from "./Filters.vue";
 import OrderItems from "../../Shared/Mobile/OrderItems.vue";
-import OrdersIndexDesktop from "./IndexDesktop.vue";
-import OrdersIndexMobile from "./IndexMobile.vue";
+import Pagination from "../../Shared/Pagination.vue";
+import Card from "../../Shared/Card.vue";
 
 export default {
     components: {
-        OrdersIndexMobile,
-        OrdersIndexDesktop,
+        Card,
+        Pagination,
         OrderItems,
         OrderFilters,
         IconCirclePlus,
         PageWrapper,
         Link
     },
-    props: ['orders', 'suppliersCount', 'shared']
+    props: ['orders', 'shared']
 }
 </script>

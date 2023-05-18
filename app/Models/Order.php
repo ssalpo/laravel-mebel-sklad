@@ -16,12 +16,12 @@ class Order extends Model
     use HasFactory, SoftDeletes, DatesFormatable;
 
     protected $fillable = [
-        'supplier_id',
         'user_id',
         'client_id',
         'amount',
         'profit',
         'status',
+        'address',
         'cancel_reason',
     ];
 
@@ -39,11 +39,6 @@ class Order extends Model
 
     public function scopeFilter($q, $data): void
     {
-        $q->when(
-            Arr::get($data, 'supplier'),
-            fn($q, $v) => $q->where('supplier_id', $v)
-        );
-
         $q->when(
             Arr::get($data, 'query'),
             fn($q, $v) => $q->where('id', $v)
@@ -86,11 +81,6 @@ class Order extends Model
     public function scopeSold($q): void
     {
         $q->where('status', self::STATUS_SOLD);
-    }
-
-    public function supplier(): BelongsTo
-    {
-        return $this->belongsTo(Supplier::class)->withTrashed();
     }
 
     public function user(): BelongsTo

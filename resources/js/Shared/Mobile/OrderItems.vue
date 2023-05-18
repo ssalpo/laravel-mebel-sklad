@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="text-muted my-1">
-                            <small v-html="[order.supplier?.name, order.client?.name ? `<strong>${order.client?.name}</strong>` : null].filter(Boolean).join(', ')"></small>
+                            <small v-html="[order.address, order.client?.name ? `<strong>${order.client?.name}</strong>` : null].filter(Boolean).join(', ')"></small>
                         </div>
                         <div class="row align-items-center">
                             <div class="col">

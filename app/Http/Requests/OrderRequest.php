@@ -22,20 +22,15 @@ class OrderRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'supplier_id' => [],
+        return [
             'user_id' => 'required|exists:users,id',
             'client_id' => 'nullable|exists:clients,id',
+            'address' => 'required|string|min:2|max:255',
             'orderItems' => 'required|array',
             'orderItems.*.nomenclature_id' => 'required|exists:nomenclatures,id',
             'orderItems.*.quantity' => 'required|integer|gt:0',
             'orderItems.*.price_for_sale' => 'required|regex:/^\d+(\.\d{1,3})?$/',
         ];
-
-        $rules['supplier_id'][] = Supplier::count() > 1 ? 'required' : 'nullable';
-        $rules['supplier_id'][] = 'exists:suppliers,id';
-
-        return $rules;
     }
 
     protected function prepareForValidation()

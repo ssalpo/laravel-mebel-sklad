@@ -19,13 +19,6 @@
         </div>
 
         <div class="mb-3">
-            <SelectSuppliers
-                auto-position
-                v-model="form.supplier"
-            />
-        </div>
-
-        <div class="mb-3">
             <SelectClients
                 auto-position
                 v-model="form.client"
@@ -69,7 +62,6 @@ import {useForm, Link} from "@inertiajs/inertia-vue3";
 import queryString from 'query-string';
 import {IconFilter, IconSearch, IconX} from "@tabler/icons-vue"
 import {size} from "lodash/collection";
-import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
 import TextInput from "../../Shared/Form/TextInput.vue";
 import SelectClients from "../../Shared/Form/SelectClients.vue";
 import BsModal from "../../Shared/BsModal.vue";
@@ -79,14 +71,13 @@ export default {
     components: {
         BsModal,
         SelectClients,
-        TextInput, SelectSuppliers, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
+        TextInput, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
     data() {
         return {
             isFiltered: false,
             form: useForm({
                 created_start: null,
                 created_end: null,
-                supplier: null,
                 client: null,
                 query: null,
             })
@@ -104,7 +95,6 @@ export default {
             this.form.query = params['query']
             this.form.created_start = params['created_start']
             this.form.created_end = params['created_end']
-            this.form.supplier = params['supplier'] ? parseInt(params['supplier']) : null
             this.form.client = params['client'] ? parseInt(params['client']) : null
         },
         submit() {
