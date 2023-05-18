@@ -73,17 +73,6 @@
                             </span>
                         </Link>
                     </li>
-                    <li class="nav-item" :class="{active: this.$page.component.startsWith('Debts')}">
-                        <Link class="nav-link" :href="route('debts.index')">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <IconBusinessplan :size="24" stroke-width="1.5"/>
-                            </span>
-
-                            <span class="nav-link-title">
-                                Долги клиентов
-                            </span>
-                        </Link>
-                    </li>
                     <li class="nav-item" :class="{active: this.$page.component.startsWith('NomenclatureArrivals')}">
                         <Link class="nav-link" :href="route('nomenclature-arrivals.index')">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">

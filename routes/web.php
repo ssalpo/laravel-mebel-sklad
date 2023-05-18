@@ -32,10 +32,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
     Route::resource('orders', OrderController::class);
 
-    Route::resource('debts/{debt}/payments', DebtPaymentController::class, ['as' => 'debts']);
-
-    Route::resource('debts', DebtController::class);
-
     Route::get('storehouse-balance', [StorehouseController::class, 'index'])->name('storehouse-balance');
 });
 
