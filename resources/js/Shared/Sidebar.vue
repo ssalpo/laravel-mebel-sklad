@@ -13,9 +13,14 @@
             </h1>
 
             <div class="navbar-nav flex-row d-lg-none">
+                <div class="nav-item me-3">
+                    <Link :href="route('orders.index')" class="btn btn-icon btn-outline-light px-2">
+                        <IconListDetails :size="18" class="me-1" stroke-width="1.7" /> Продажи
+                    </Link>
+                </div>
                 <div class="nav-item">
-                    <Link :href="route('orders.create')" class="btn btn-success">
-                        <IconCirclePlus :size="18" class="me-2" stroke-width="1.7" /> Новый заказ
+                    <Link :href="route('orders.create')" class="btn btn-icon btn-success">
+                        <IconShoppingCartPlus :size="18" stroke-width="1.7" />
                     </Link>
                 </div>
             </div>
@@ -149,6 +154,7 @@
 
 <script>
 import {
+    IconShoppingCartPlus,
     IconCirclePlus,
     IconLogin,
     IconBuilding,
@@ -166,6 +172,7 @@ import {queryParams} from "../functions";
 
 export default {
     components: {
+        IconShoppingCartPlus,
         IconFilter,
         Link,
         UserDropdown,
