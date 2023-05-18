@@ -14,15 +14,14 @@ class NomenclatureArrival extends Model
 
     protected $fillable = [
         'nomenclature_id',
+        'supplier_id',
         'quantity',
         'base_price',
         'price_for_sale',
         'comment',
-        'arrival_at',
     ];
 
     protected $casts = [
-        'arrival_at' => 'datetime',
         'quantity' => 'double'
     ];
 
@@ -35,8 +34,8 @@ class NomenclatureArrival extends Model
         return $this->belongsTo(Nomenclature::class)->withTrashed();
     }
 
-    public function getArrivalAtFormattedAttribute()
+    public function supplier(): BelongsTo
     {
-        return $this->arrival_at?->format('d-m-Y H:i');
+        return $this->belongsTo(Supplier::class);
     }
 }

@@ -19,6 +19,10 @@
                 <table class="table table-vcenter text-nowrap card-table">
                     <tbody>
                     <tr>
+                        <td width="150" class="text-start text-sm-end fw-bold">Поставщик</td>
+                        <td>{{ nomenclatureArrival.supplier.name }}</td>
+                    </tr>
+                    <tr>
                         <td width="150" class="text-start text-sm-end fw-bold">Товар</td>
                         <td>{{ nomenclatureArrival.nomenclature.name }}</td>
                     </tr>
@@ -33,10 +37,6 @@
                     <tr>
                         <td width="150" class="text-start text-sm-end fw-bold">Цена продажи</td>
                         <td>{{ numberFormat(nomenclatureArrival.price_for_sale, 2) }} сом.</td>
-                    </tr>
-                    <tr>
-                        <td width="150" class="text-start text-sm-end fw-bold">Дата прихода</td>
-                        <td>{{ nomenclatureArrival.arrival_at_formatted }}</td>
                     </tr>
                     <tr>
                         <td width="150" class="text-start text-sm-end fw-bold">Дата создания</td>

@@ -17,20 +17,10 @@ class NomenclatureArrivalController extends Controller
 
     public function index()
     {
-        $nomenclatureArrivals = NomenclatureArrival::with('nomenclature')
-            ->orderBy('arrival_at', 'DESC')
+        $nomenclatureArrivals = NomenclatureArrival::with('nomenclature', 'supplier')
+            ->orderBy('created_at', 'DESC')
             ->paginate()
-            ->onEachSide(0)
-            ->through(fn($m) => [
-                'id' => $m->id,
-                'nomenclature' => ['name' => $m->nomenclature->name],
-                'quantity' => $m->quantity,
-                'base_price' => $m->base_price,
-                'price_for_sale' => $m->price_for_sale,
-                'arrival_at_formatted' => $m->arrival_at_formatted,
-                'created_at_formatted' => $m->created_at_formatted,
-                'comment' => $m->comment,
-            ]);
+            ->onEachSide(0);
 
         return inertia('NomenclatureArrivals/Index', compact('nomenclatureArrivals'));
     }
@@ -51,7 +41,7 @@ class NomenclatureArrivalController extends Controller
 
     public function show(NomenclatureArrival $nomenclatureArrival)
     {
-        $nomenclatureArrival->load('nomenclature');
+        $nomenclatureArrival->load('nomenclature', 'supplier');
 
         return inertia('NomenclatureArrivals/Show', compact('nomenclatureArrival'));
     }

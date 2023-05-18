@@ -11,34 +11,32 @@
             </Link>
         </template>
 
-        <NomenclatureArrivalsIndexMobile
-            v-if="isMobile"
-            :nomenclature-arrivals="nomenclatureArrivals"
-        />
+        <card>
+            <NomenclatureItems
+                :items="nomenclatureArrivals.data"
+            />
 
-        <NomenclatureArrivalsIndexDesktop
-            v-if="!isMobile"
-            :nomenclature-arrivals="nomenclatureArrivals"
-        />
+            <template #cardFooter v-if="nomenclatureArrivals.links.length > 3">
+                <Pagination class="float-end" :links="nomenclatureArrivals.links"/>
+            </template>
+        </card>
     </PageWrapper>
 </template>
 
 <script>
 import PageWrapper from "../../Shared/PageWrapper.vue";
 import {Link} from "@inertiajs/inertia-vue3";
-import Card from "../../Shared/Card.vue";
-import DeleteBtn from "../../Shared/DeleteBtn.vue";
-import {numberFormat} from "../../functions";
 import Pagination from "../../Shared/Pagination.vue";
 import EditLinkBtn from "../../Shared/EditLinkBtn.vue";
 import {IconCirclePlus} from "@tabler/icons-vue";
-import NomenclatureArrivalsIndexMobile from "./IndexMobile.vue";
-import NomenclatureArrivalsIndexDesktop from "./IndexDesktop.vue";
+import NomenclatureItems from "../../Shared/Mobile/NomenclatureItems.vue";
+import Card from "../../Shared/Card.vue";
 
 export default {
     components: {
-        NomenclatureArrivalsIndexDesktop,
-        NomenclatureArrivalsIndexMobile,
+        Card,
+        Pagination,
+        NomenclatureItems,
         IconCirclePlus,
         EditLinkBtn,
         PageWrapper,

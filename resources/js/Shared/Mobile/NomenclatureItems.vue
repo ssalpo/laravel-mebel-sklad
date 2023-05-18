@@ -5,10 +5,12 @@
                 <div class="row align-items-center">
                     <div class="col">
                         <div class="text-truncate text-dark">
-                            <strong>{{item.title}}</strong>
+                            <strong>{{item.nomenclature.name}}</strong>
                         </div>
                         <div class="text-muted">
-                            <small>{{item.date}}</small>
+                            <small>
+                                {{item.supplier.name}}, {{item.created_at_formatted}}
+                            </small>
                         </div>
                     </div>
                     <div class="col-auto text-muted">

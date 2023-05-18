@@ -5,6 +5,13 @@
         <form @submit.prevent="submit">
             <card>
                 <div class="col col-sm-6 offset-sm-3 mb-3">
+                    <SelectSuppliers
+                        v-model="form.supplier_id"
+                        :invalid-text="form.errors.supplier_id"
+                    />
+                </div>
+
+                <div class="col col-sm-6 offset-sm-3 mb-3">
                     <SelectNomenclatures
                         label="Товар"
                         label-required
@@ -31,17 +38,6 @@
                     />
                 </div>
 
-                <div class="col col-sm-6 offset-sm-3 mb-3">
-                    <AirDatePicker
-                        label="Дата прихода"
-                        placeholder="Выберите дату прихода"
-                        :invalid-text="form.errors.arrival_at"
-                        timepicker
-                        :as-modal="isMobile"
-                        v-model="form.arrival_at"
-                    />
-                </div>
-
                 <template #cardFooter>
                     <div class="col col-sm-6 offset-sm-3">
                         <button :disabled="form.processing" type="submit" class="btn btn-primary me-2">
@@ -63,9 +59,11 @@ import {useForm, Link} from "@inertiajs/inertia-vue3";
 import NumericField from "../../Shared/Form/NumericField.vue";
 import AirDatePicker from "../../Shared/Form/AirDatePicker.vue";
 import SelectNomenclatures from "../../Shared/Form/SelectNomenclatures.vue";
+import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
 
 export default {
     components: {
+        SelectSuppliers,
         PageWrapper,
         SelectNomenclatures,
         AirDatePicker,
@@ -78,11 +76,11 @@ export default {
     data() {
         return {
             form: useForm({
+                supplier_id: this.nomenclatureArrival?.supplier_id || "",
                 nomenclature_id: this.nomenclatureArrival?.nomenclature_id || "",
                 quantity: this.nomenclatureArrival?.quantity,
                 name: this.nomenclatureArrival?.name,
                 comment: this.nomenclatureArrival?.comment,
-                arrival_at: this.nomenclatureArrival?.arrival_at,
             })
         }
     },

@@ -23,17 +23,10 @@ class NomenclatureArrivalRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'supplier_id' => 'required|exists:suppliers,id',
             'nomenclature_id' => 'required|exists:nomenclatures,id',
             'quantity' => 'required|numeric|gt:0',
             'comment' => 'nullable|string',
-            'arrival_at' => 'nullable|date_format:Y-m-d H:i'
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        return $this->merge([
-            'arrival_at' => ($this->arrival_at ? Carbon::parse($this->arrival_at) : now())->format('Y-m-d H:i')
-        ]);
     }
 }

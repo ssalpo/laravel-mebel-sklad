@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('nomenclature_arrivals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('nomenclature_id')->constrained();
+            $table->foreignId('supplier_id')->constrained();
             $table->double('quantity')->default(0);
             $table->decimal('base_price')->default(0);
             $table->decimal('price_for_sale')->default(0);
