@@ -15,12 +15,12 @@
                     <NewClientModal @success="setClient" />
                 </div>
 
-                <div class="col col-sm-6 offset-sm-3 mb-3" v-if="showcasesCount > 1">
-                    <SelectShowcases
-                        v-model="form.showcase_id"
+                <div class="col col-sm-6 offset-sm-3 mb-3" v-if="suppliersCount > 1">
+                    <SelectSuppliers
+                        v-model="form.supplier_id"
                         label-required
-                        :invalid-text="form.errors.showcase_id"
-                        label="Витрина"
+                        :invalid-text="form.errors.supplier_id"
+                        label="Поставщик"
                     />
                 </div>
 
@@ -93,17 +93,17 @@ import map from "lodash/map";
 import {numberFormat} from "../../functions";
 import SelectClients from "../../Shared/Form/SelectClients.vue";
 import OrderNomenclatures from "../../Shared/Form/OrderNomenclatures.vue";
-import SelectShowcases from "../../Shared/Form/SelectShowcases.vue";
+import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
 import NewClientModal from "../../Shared/Modals/NewClientModal.vue";
 import BarcodeScannerModal from "../../Shared/Modals/BarcodeScannerModal.vue";
 import find from "lodash/find";
 
 export default {
-    props: ['nomenclatures', 'showcasesCount', 'lastSelectedShowcase'],
+    props: ['nomenclatures', 'suppliersCount'],
     components: {
         BarcodeScannerModal,
         NewClientModal,
-        SelectShowcases,
+        SelectSuppliers,
         OrderNomenclatures,
         SelectClients,
         NumericField,
@@ -116,7 +116,7 @@ export default {
     data() {
         return {
             form: useForm({
-                showcase_id: this.lastSelectedShowcase,
+                supplier_id: null,
                 client_id: null,
                 orderItems: []
             })

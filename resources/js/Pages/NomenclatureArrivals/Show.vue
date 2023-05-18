@@ -24,7 +24,7 @@
                     </tr>
                     <tr>
                         <td width="150" class="text-start text-sm-end fw-bold">Кол-во</td>
-                        <td>{{ nomenclatureArrival.quantity }} {{nomenclatureArrival.nomenclature.unit.name}}</td>
+                        <td>{{ nomenclatureArrival.quantity }}</td>
                     </tr>
                     <tr>
                         <td width="150" class="text-start text-sm-end fw-bold">Себестоимость</td>
@@ -63,7 +63,7 @@ import DeleteBtn from "../../Shared/DeleteBtn.vue";
 
 export default {
     components: {DeleteBtn, EditLinkBtn, Card, PageWrapper, Link},
-    props: ['nomenclatureArrival', 'showcasesCount'],
+    props: ['nomenclatureArrival', 'suppliersCount'],
     methods: {
         numberFormat
     }

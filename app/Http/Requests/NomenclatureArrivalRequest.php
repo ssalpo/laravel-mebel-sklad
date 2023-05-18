@@ -23,7 +23,6 @@ class NomenclatureArrivalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => 'required',
             'nomenclature_id' => 'required|exists:nomenclatures,id',
             'quantity' => 'required|numeric|gt:0',
             'comment' => 'nullable|string',
@@ -34,7 +33,6 @@ class NomenclatureArrivalRequest extends FormRequest
     protected function prepareForValidation()
     {
         return $this->merge([
-            'company_id' => auth()->user()->company_id,
             'arrival_at' => ($this->arrival_at ? Carbon::parse($this->arrival_at) : now())->format('Y-m-d H:i')
         ]);
     }

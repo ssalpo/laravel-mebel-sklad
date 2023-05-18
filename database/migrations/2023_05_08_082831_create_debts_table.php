@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('debts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained();
             $table->foreignId('client_id')->nullable()->constrained();
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('order_id')->nullable()->constrained();

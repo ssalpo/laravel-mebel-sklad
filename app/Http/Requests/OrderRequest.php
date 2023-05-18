@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Showcase;
+use App\Models\Supplier;
 use Illuminate\Foundation\Http\FormRequest;
 
 class OrderRequest extends FormRequest
@@ -23,8 +23,7 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'showcase_id' => [],
-            'company_id' => 'required',
+            'supplier_id' => [],
             'user_id' => 'required|exists:users,id',
             'client_id' => 'nullable|exists:clients,id',
             'orderItems' => 'required|array',
@@ -33,8 +32,8 @@ class OrderRequest extends FormRequest
             'orderItems.*.price_for_sale' => 'required|regex:/^\d+(\.\d{1,3})?$/',
         ];
 
-        $rules['showcase_id'][] = Showcase::count() > 1 ? 'required' : 'nullable';
-        $rules['showcase_id'][] = 'exists:showcases,id';
+        $rules['supplier_id'][] = Supplier::count() > 1 ? 'required' : 'nullable';
+        $rules['supplier_id'][] = 'exists:suppliers,id';
 
         return $rules;
     }
@@ -42,7 +41,6 @@ class OrderRequest extends FormRequest
     protected function prepareForValidation()
     {
         return $this->merge([
-            'company_id' => auth()->user()->company_id,
             'user_id' => auth()->id()
         ]);
     }

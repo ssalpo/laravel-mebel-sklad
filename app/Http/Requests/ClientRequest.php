@@ -22,16 +22,8 @@ class ClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => 'required',
             'name' => 'required|min:2|max:255',
             'phone' => 'nullable|min:2|max:255'
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        return $this->merge([
-            'company_id' => auth()->user()->company_id
-        ]);
     }
 }

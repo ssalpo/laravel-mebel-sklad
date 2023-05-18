@@ -22,7 +22,6 @@ class DebtRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => 'required',
             'created_by' => 'required',
             'client_id' => 'required|exists:clients,id',
             'order_id' => 'nullable|exists:orders,id',
@@ -35,7 +34,6 @@ class DebtRequest extends FormRequest
     {
         return $this->merge([
             'created_by' => auth()->id(),
-            'company_id' => auth()->user()->company_id
         ]);
     }
 }

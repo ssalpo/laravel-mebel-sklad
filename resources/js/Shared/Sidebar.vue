@@ -148,14 +148,9 @@
                                         Товар
                                     </Link>
                                     <Link class="dropdown-item"
-                                          :class="{active: $page.component.startsWith('Showcases')}"
-                                          :href="route('showcases.index')">
-                                        Витрины
-                                    </Link>
-                                    <Link class="dropdown-item"
-                                          :class="{active: $page.component.startsWith('Units')}"
-                                          :href="route('units.index')">
-                                        Единица измерения
+                                          :class="{active: $page.component.startsWith('Suppliers')}"
+                                          :href="route('suppliers.index')">
+                                        Поставщики
                                     </Link>
                                     <Link class="dropdown-item"
                                           :class="{active: $page.component.startsWith('Users')}"
@@ -218,11 +213,10 @@ export default {
     },
     computed: {
         directoriesIsActive() {
-            return this.$page.component.startsWith('Showcases') ||
+            return this.$page.component.startsWith('Suppliers') ||
                 this.$page.component.startsWith('Users') ||
                 this.$page.component.startsWith('Nomenclatures') ||
-                this.$page.component.startsWith('Clients') ||
-                this.$page.component.startsWith('Units');
+                this.$page.component.startsWith('Clients');
         },
         storehouseIsActive() {
             return this.$page.component.startsWith('NomenclatureArrivals') ||

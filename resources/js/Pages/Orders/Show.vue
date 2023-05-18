@@ -7,9 +7,9 @@
             <div class="table-responsive">
                 <table class="table table-vcenter text-nowrap card-table">
                     <tbody>
-                        <tr v-if="showcasesCount">
-                            <td width="150" class="text-start text-sm-end fw-bold">Витрина</td>
-                            <td>{{order.showcase?.name || '-'}}</td>
+                        <tr v-if="suppliersCount">
+                            <td width="150" class="text-start text-sm-end fw-bold">Поставщик</td>
+                            <td>{{order.supplier?.name || '-'}}</td>
                         </tr>
                         <tr>
                             <td class="text-start text-sm-end fw-bold">Клиент</td>
@@ -65,7 +65,6 @@
                     <tr v-for="item in order.order_items">
                         <td>{{item.nomenclature.name}}</td>
                         <td>{{item.price_for_sale}} сом.</td>
-                        <td>{{ item.quantity}} {{item.nomenclature.unit.name}}</td>
                         <td>{{numberFormat(item.total_amount, 2)}} сом.</td>
                         <td>{{numberFormat(item.total_profit, 2)}} сом.</td>
                     </tr>
@@ -86,7 +85,7 @@ import OrderCancelModal from "../../Shared/Modals/OrderCancelModal.vue";
 
 export default {
     components: {OrderCancelModal, Card, PageWrapper, Link},
-    props: ['order', 'showcasesCount', 'shared'],
+    props: ['order', 'suppliersCount', 'shared'],
     methods: {
         numberFormat
     }

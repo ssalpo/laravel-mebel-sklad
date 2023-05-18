@@ -20,9 +20,7 @@ class NomenclatureController extends Controller
 
     public function index()
     {
-        $nomenclatures = Nomenclature::with('unit')
-            ->paginate()
-            ->onEachSide(0);
+        $nomenclatures = Nomenclature::paginate()->onEachSide(0);
 
         return inertia('Nomenclatures/Index', compact('nomenclatures'));
     }

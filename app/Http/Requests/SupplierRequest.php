@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShowcaseRequest extends FormRequest
+class SupplierRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,7 @@ class ShowcaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => 'required|integer',
             'name' => 'required|min:1|max:255'
         ];
-    }
-
-    public function prepareForValidation()
-    {
-        return $this->merge([
-            'company_id' => auth()->user()->company_id
-        ]);
     }
 }

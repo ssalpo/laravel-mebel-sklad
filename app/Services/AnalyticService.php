@@ -48,11 +48,10 @@ class AnalyticService
             ->join(
                 DB::raw('orders o'),
                 fn($q) => $q->on('o.id', '=', 'o_i.order_id')
-                    ->where('o.company_id', auth()->user()->company_id)
                     ->where('o.status', $status)
                     ->when(
-                        Arr::get($this->filters, 'showcase'),
-                        fn($q, $v) => $q->where('o.showcase_id', $v)
+                        Arr::get($this->filters, 'supplier'),
+                        fn($q, $v) => $q->where('o.supplier_id', $v)
                     )
                     ->when(
                         Arr::get($this->filters, 'client'),
@@ -67,7 +66,6 @@ class AnalyticService
             ->join(
                 DB::raw('nomenclatures n'),
                 fn($q) => $q->on('n.id', '=', 'o_i.nomenclature_id')
-                    ->where('n.company_id', auth()->user()->company_id)
                     ->whereNull('n.deleted_at')
             )
             ->groupBy('n.id')

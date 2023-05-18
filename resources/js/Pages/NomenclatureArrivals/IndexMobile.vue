@@ -30,7 +30,6 @@ export default {
                 id: item.id,
                 title: item.nomenclature.name,
                 quantity: item.quantity,
-                unit: item.nomenclature.unit,
                 date: item.arrival_at_formatted
             }))
         }

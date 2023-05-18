@@ -18,7 +18,6 @@ class NomenclatureArrivalsTableSeeder extends Seeder
             $nomenclature = Nomenclature::withoutGlobalScopes()->findOrFail($i);
 
             NomenclatureArrival::create([
-                'company_id' => 1,
                 'nomenclature_id' => $i,
                 'quantity' => random_int(15, 40),
                 'base_price' => $nomenclature->base_price,

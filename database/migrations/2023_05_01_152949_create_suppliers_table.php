@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained();
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('suppliers');
     }
 };

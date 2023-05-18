@@ -80,7 +80,7 @@ import Pagination from "../../Shared/Pagination.vue";
 
 export default {
     name: "OrdersIndexMobile",
-    props: ['orders', 'showcasesCount'],
+    props: ['orders', 'suppliersCount'],
     components: {Pagination, OrderItems, Card}
 }
 </script>

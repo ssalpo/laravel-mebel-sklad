@@ -23,18 +23,10 @@ class NomenclatureOperationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => 'required',
             'type' => 'required|in:' . implode(',', array_keys(NomenclatureOperation::OPERATION_LABELS)),
             'nomenclature_id' => 'required|exists:nomenclatures,id',
             'quantity' => 'required|numeric|gt:0',
             'comment' => 'nullable|string'
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        return $this->merge([
-            'company_id' => auth()->user()?->company_id
-        ]);
     }
 }

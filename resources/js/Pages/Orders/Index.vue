@@ -16,13 +16,13 @@
         <OrdersIndexMobile
             v-if="isMobile"
             :orders="orders"
-            :showcases-count="showcasesCount"
+            :suppliers-count="suppliersCount"
         />
 
         <OrdersIndexDesktop
             v-else
             :orders="orders"
-            :showcases-count="showcasesCount"
+            :suppliers-count="suppliersCount"
         />
 
     </PageWrapper>
@@ -47,6 +47,6 @@ export default {
         PageWrapper,
         Link
     },
-    props: ['orders', 'showcasesCount', 'shared']
+    props: ['orders', 'suppliersCount', 'shared']
 }
 </script>

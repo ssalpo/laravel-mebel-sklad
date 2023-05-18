@@ -1,18 +1,19 @@
 <template>
     <CustomSelect
         v-bind="$attrs"
+        searchable
         prefetch
         remote
-        :remote-url="route('autocomplete.units')"
+        :remote-url="route('autocomplete.suppliers')"
         full
-        placeholder="Выберите ед. измерения"
+        placeholder="Выберите поставщика"
     />
 </template>
 
 <script>
 import CustomSelect from "./CustomSelect.vue";
 export default {
-    name: "SelectUnits",
+    name: "SelectSuppliers",
     components: {CustomSelect}
 }
 </script>

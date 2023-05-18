@@ -26,10 +26,10 @@
             />
         </div>
 
-        <SelectShowcases
+        <SelectSuppliers
             auto-position
-            v-model="form.showcase"
-            :invalid-text="form.errors.showcase"
+            v-model="form.supplier"
+            :invalid-text="form.errors.supplier"
         />
 
         <template #footer="{hide}">
@@ -55,19 +55,19 @@ import {useForm, Link} from "@inertiajs/inertia-vue3";
 import queryString from 'query-string';
 import {IconFilter, IconSearch, IconX} from "@tabler/icons-vue"
 import {size} from "lodash/collection";
-import SelectShowcases from "../../Shared/Form/SelectShowcases.vue";
+import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
 import BsModal from "../../Shared/BsModal.vue";
 
 export default {
     name: "DashboardFilters",
-    components: {BsModal, SelectShowcases, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
+    components: {BsModal, SelectSuppliers, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
     data() {
         return {
             isFiltered: false,
             form: useForm({
                 start: null,
                 end: null,
-                showcase: null
+                supplier: null
             })
         }
     },
@@ -82,7 +82,7 @@ export default {
 
             this.form.start = params['start']
             this.form.end = params['end']
-            this.form.showcase = params['showcase'] ? parseInt(params['showcase']) : null
+            this.form.supplier = params['supplier'] ? parseInt(params['supplier']) : null
         },
         submit() {
             this.form.get(route('dashboard.index'))

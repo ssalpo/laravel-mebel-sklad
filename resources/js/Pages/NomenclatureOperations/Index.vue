@@ -26,7 +26,7 @@
                     <tbody>
                     <tr v-for="nomenclatureOperation in nomenclatureOperations.data">
                         <td>{{ nomenclatureOperation.nomenclature.name }}</td>
-                        <td>{{ numberFormat(nomenclatureOperation.quantity, 2) }} {{nomenclatureOperation.nomenclature.unit}}</td>
+                        <td>{{ numberFormat(nomenclatureOperation.quantity, 2) }}</td>
                         <td>{{ numberFormat(nomenclatureOperation.base_price, 2) }}</td>
                         <td>{{ nomenclatureOperation.comment }}</td>
                         <td class="text-muted">{{ nomenclatureOperation.created_at_formatted }}</td>

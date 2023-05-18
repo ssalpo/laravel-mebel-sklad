@@ -19,7 +19,7 @@
                 <tr v-for="nomenclatureArrival in nomenclatureArrivals.data">
                     <td>{{ nomenclatureArrival.id }}</td>
                     <td>{{ nomenclatureArrival.nomenclature.name }}</td>
-                    <td>{{ nomenclatureArrival.quantity }} {{nomenclatureArrival.nomenclature.unit}}</td>
+                    <td>{{ nomenclatureArrival.quantity }}</td>
                     <td>{{ numberFormat(nomenclatureArrival.base_price, 2) }} сом.</td>
                     <td>{{ numberFormat(nomenclatureArrival.price_for_sale, 2) }} сом.</td>
                     <td>{{ nomenclatureArrival.arrival_at_formatted }}</td>

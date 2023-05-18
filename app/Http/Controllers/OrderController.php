@@ -6,7 +6,7 @@ use App\Http\Requests\OrderCancelRequest;
 use App\Http\Requests\OrderRequest;
 use App\Models\Nomenclature;
 use App\Models\Order;
-use App\Models\Showcase;
+use App\Models\Supplier;
 use App\Services\OrderService;
 use App\Services\Toast;
 use Illuminate\Http\RedirectResponse;
@@ -23,15 +23,15 @@ class OrderController extends Controller
 
     public function index()
     {
-        $showcasesCount = Showcase::count();
+        $suppliersCount = Supplier::count();
 
-        $orders = Order::with(['client', 'showcase'])
+        $orders = Order::with(['client', 'supplier'])
             ->filter(request()?->all())
             ->orderBy('created_at', 'DESC')
             ->paginate()
             ->onEachSide(0);
 
-        return inertia('Orders/Index', compact('orders', 'showcasesCount'));
+        return inertia('Orders/Index', compact('orders', 'suppliersCount'));
     }
 
     public function create()
@@ -47,11 +47,9 @@ class OrderController extends Controller
                 ]
             );
 
-        $showcasesCount = Showcase::count();
+        $suppliersCount = Supplier::count();
 
-        $lastSelectedShowcase = $showcasesCount > 1 ? Cache::get(auth()->id() . ':last_showcase') : null;
-
-        return inertia('Orders/Edit', compact('nomenclatures', 'showcasesCount', 'lastSelectedShowcase'));
+        return inertia('Orders/Edit', compact('nomenclatures', 'suppliersCount'));
     }
 
     public function store(OrderRequest $request)
@@ -63,11 +61,11 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->load(['client', 'showcase', 'orderItems.nomenclature.unit']);
+        $order->load(['client', 'supplier', 'orderItems.nomenclature']);
 
-        $showcasesCount = Showcase::count();
+        $suppliersCount = Supplier::count();
 
-        return inertia('Orders/Show', compact('showcasesCount', 'order'));
+        return inertia('Orders/Show', compact('suppliersCount', 'order'));
     }
 
     public function cancel(OrderCancelRequest $request, int $orderId): RedirectResponse

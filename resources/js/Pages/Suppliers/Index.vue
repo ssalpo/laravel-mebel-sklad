@@ -1,13 +1,13 @@
 <template>
     <PageWrapper
-        header-title="Витрины"
-        header-pre-title="В списке отображается все ваши доступные витрины"
+        header-title="Поставщики"
+        header-pre-title="В списке отображается все ваши доступные поставщики"
     >
 
         <template #headerActions>
-            <Link :href="route('showcases.create')" class="btn btn-primary">
+            <Link :href="route('suppliers.create')" class="btn btn-primary">
                 <IconCirclePlus :size="18" class="me-2" stroke-width="1.7" />
-                Добавить витрину
+                Добавить поставщика
             </Link>
         </template>
 
@@ -24,20 +24,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="showcase in showcases">
-                        <td>{{ showcase.id }}</td>
-                        <td>{{ showcase.name }}</td>
+                    <tr v-for="supplier in suppliers">
+                        <td>{{ supplier.id }}</td>
+                        <td>{{ supplier.name }}</td>
                         <td class="text-muted">
-                            {{ showcase.created_at_formatted }}
+                            {{ supplier.created_at_formatted }}
                         </td>
                         <td class="text-end">
                             <EditLinkBtn
-                                :url="route('showcases.edit', showcase.id)"
+                                :url="route('suppliers.edit', supplier.id)"
                                 class="me-2"
                             />
 
                             <delete-btn
-                                :url="route('showcases.destroy', showcase.id)"
+                                :url="route('suppliers.destroy', supplier.id)"
                             />
                         </td>
                     </tr>
@@ -59,6 +59,6 @@ import {IconCirclePlus} from "@tabler/icons-vue";
 
 export default {
     components: {IconCirclePlus, EditLinkBtn, DeleteBtn, Card, PageWrapper, Link},
-    props: ['showcases']
+    props: ['suppliers']
 }
 </script>

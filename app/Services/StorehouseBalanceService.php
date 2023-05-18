@@ -19,7 +19,6 @@ class StorehouseBalanceService
             'orders',
             fn($q) => $q->on('orders.id', '=', 'order_items.order_id')
                 ->where('orders.status', Order::STATUS_SOLD)
-                ->where('orders.company_id', auth()->user()->company_id)
         )
             ->groupBy('nomenclature_id')
             ->get();
@@ -37,9 +36,7 @@ class StorehouseBalanceService
             'nomenclature_id',
             DB::raw('n.name AS nomenclature_name'),
             DB::raw('SUM(quantity) AS quantity'),
-            DB::raw('u.name as unit_name'),
         )->join('nomenclatures as n', 'n.id', '=', 'nomenclature_arrivals.nomenclature_id')
-            ->leftJoin('units as u', 'u.id', '=', 'n.unit_id')
             ->groupBy('nomenclature_id')
             ->get()
             ->transform(function ($m) use ($orderItems, $nomenclatureOperations) {
@@ -56,7 +53,6 @@ class StorehouseBalanceService
                     'id' => $m->nomenclature_id,
                     'nomenclature_name' => $m->nomenclature_name,
                     'quantity' => ($m->quantity + ($nomenclatureRefund?->quantity ?? 0)) - $subtractQuantity,
-                    'unit' => $m->unit_name
                 ];
             });
     }

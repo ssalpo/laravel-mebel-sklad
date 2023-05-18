@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\CurrentCompanyScope;
 use App\Models\Traits\DatesFormatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +13,6 @@ class NomenclatureArrival extends Model
     use HasFactory, SoftDeletes, DatesFormatable;
 
     protected $fillable = [
-        'company_id',
         'nomenclature_id',
         'quantity',
         'base_price',
@@ -31,16 +29,6 @@ class NomenclatureArrival extends Model
     protected $appends = [
         'created_at_formatted'
     ];
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new CurrentCompanyScope);
-    }
-
-    public function company(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
 
     public function nomenclature(): BelongsTo
     {

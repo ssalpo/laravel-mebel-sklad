@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('nomenclature_operations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
             $table->foreignId('nomenclature_id')->constrained()->cascadeOnDelete();
             $table->tinyInteger('type');
             $table->double('quantity');

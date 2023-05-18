@@ -18,11 +18,9 @@ class NomenclatureTableSeeder extends Seeder
             $priceForSale = random_int($basePrice, $basePrice + rand(1, 10));
 
             Nomenclature::create([
-                'company_id' => 1,
                 'name' => 'Nomenclature ' . $i,
                 'base_price' => $basePrice,
                 'price_for_sale' => $priceForSale,
-                'unit_id' => 1,
             ]);
         }
     }

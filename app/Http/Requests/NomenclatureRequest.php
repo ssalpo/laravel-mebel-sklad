@@ -22,18 +22,9 @@ class NomenclatureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => 'required',
             'name' => 'required|min:2|max:255',
             'base_price' => 'required|regex:/^\d+(\.\d{1,3})?$/|gt:0',
             'price_for_sale' => 'required|regex:/^\d+(\.\d{1,3})?$/|gt:0',
-            'unit_id' => 'required|exists:units,id'
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        return $this->merge([
-            'company_id' => auth()->user()->company_id
-        ]);
     }
 }

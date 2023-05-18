@@ -1,14 +1,14 @@
 <template>
     <PageWrapper
-        :header-title="!unit?.id ? `Новая единицы измерения` : `Редактирование единицы измерения`"
+        :header-title="!supplier?.id ? `Новый поставщик` : `Редактирование ${supplier.name}`"
     >
         <form @submit.prevent="submit">
             <card>
                 <div class="col col-sm-6 offset-sm-3">
                     <TextInput
-                        label="Название"
+                        label="Название поставщика"
                         label-required
-                        placeholder="Введите название"
+                        placeholder="Введите название поставщика"
                         v-model="form.name"
                         :invalid-text="form.errors.name"
                     />
@@ -17,9 +17,9 @@
                 <template #cardFooter>
                     <div class="col col-sm-6 offset-sm-3">
                         <button :disabled="form.processing" type="submit" class="btn btn-primary me-2">
-                            {{unit?.id ? 'Изменить' : 'Добавить'}}
+                            {{supplier?.id ? 'Изменить' : 'Добавить'}}
                         </button>
-                        <Link :disabled="form.processing" :href="route('units.index')" class="btn">Отменить</Link>
+                        <Link :disabled="form.processing" :href="route('suppliers.index')" class="btn">Отменить</Link>
                     </div>
                 </template>
             </card>
@@ -35,22 +35,22 @@ import {useForm, Link} from "@inertiajs/inertia-vue3";
 
 export default {
     components: {TextInput, Card, PageWrapper, Link},
-    props: ['unit'],
+    props: ['supplier'],
     data() {
         return {
             form: useForm({
-                name: this.unit?.name
+                name: this.supplier?.name
             })
         }
     },
     methods: {
         submit() {
-            if (!this.unit?.id) {
-                this.form.post(route('units.store'));
+            if (!this.supplier?.id) {
+                this.form.post(route('suppliers.store'));
                 return;
             }
 
-            this.form.put(route('units.update', this.unit.id))
+            this.form.put(route('suppliers.update', this.supplier.id))
         }
     }
 }

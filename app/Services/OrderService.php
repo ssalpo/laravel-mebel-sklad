@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Nomenclature;
 use App\Models\Order;
-use App\Models\Showcase;
+use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Collection as ModelCollection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
@@ -22,14 +22,8 @@ class OrderService
 
             $totals = $this->calculateTotals($data, $nomenclatures);
 
-            if (Showcase::count() <= 1) {
-                $data['showcase_id'] = Showcase::latest()->first()?->id;
-            }
-
-
-            // Запоминаем последнюю выбранную витрину
-            if($data['showcase_id']) {
-                Cache::forever(auth()->id() . ':last_showcase', $data['showcase_id']);
+            if (Supplier::count() <= 1) {
+                $data['supplier_id'] = Supplier::latest()->first()?->id;
             }
 
             $order = Order::create(array_merge(
@@ -44,7 +38,6 @@ class OrderService
             foreach ($data['orderItems'] as $item) {
                 $nomenclature = $nomenclatures->where('id', $item['nomenclature_id'])->first();
                 $item['price'] = $nomenclature->price;
-                $item['unit'] = $nomenclature->unit;
                 $item['base_price'] = $nomenclature->base_price;
 
                 $order->orderItems()->create($item);

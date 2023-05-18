@@ -21,7 +21,6 @@
                         <th>Название</th>
                         <th>Себестоимость</th>
                         <th>Цена продажи</th>
-                        <th>Единица измерения</th>
                         <th>Дата создания</th>
                         <th>Номер штрихкода</th>
                         <th width="120"></th>
@@ -33,7 +32,6 @@
                         <td>{{ nomenclature.name }}</td>
                         <td>{{ numberFormat(nomenclature.base_price, 2) }} сом.</td>
                         <td>{{ numberFormat(nomenclature.price_for_sale, 2) }} сом.</td>
-                        <td class="text-muted">{{ nomenclature.unit.name }}</td>
                         <td class="text-muted">{{ nomenclature.created_at_formatted }}</td>
                         <td>
                             <NomenclatureBarcodeChangeModal

@@ -13,7 +13,6 @@ class Client extends Model
     use HasFactory, SoftDeletes, DatesFormatable;
 
     protected $fillable = [
-        'company_id',
         'name',
         'phone',
     ];
@@ -21,9 +20,4 @@ class Client extends Model
     protected $appends = [
         'created_at_formatted'
     ];
-
-    public function company(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
 }

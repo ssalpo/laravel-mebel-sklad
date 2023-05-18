@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('nomenclatures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained();
             $table->string('name');
             $table->decimal('base_price')->default(0);
             $table->decimal('price_for_sale')->default(0);
-            $table->foreignId('unit_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

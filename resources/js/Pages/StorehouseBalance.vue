@@ -15,7 +15,7 @@
                     <tbody>
                         <tr v-for="balance in balances">
                             <td>{{ balance.nomenclature_name }}</td>
-                            <td>{{ balance.quantity }} {{balance.unit}}</td>
+                            <td>{{ balance.quantity }}</td>
                         </tr>
                     </tbody>
                 </table>

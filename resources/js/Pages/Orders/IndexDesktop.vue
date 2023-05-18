@@ -5,7 +5,7 @@
                 <thead>
                 <tr>
                     <th width="40">#</th>
-                    <th width="40" v-if="showcasesCount > 0">Витрина</th>
+                    <th width="40" v-if="suppliersCount > 0">Поставщик</th>
                     <th>Сумма</th>
                     <th>Прибыль</th>
                     <th>Клиент</th>
@@ -20,7 +20,7 @@
                     @click="$inertia.visit(route('orders.show', order.id))"
                 >
                     <td>{{order.id}}</td>
-                    <td v-if="showcasesCount > 0">{{order.showcase?.name || '-'}}</td>
+                    <td v-if="suppliersCount > 0">{{order.supplier?.name || '-'}}</td>
                     <td>{{numberFormat(order.amount, 2)}} сом.</td>
                     <td>{{numberFormat(order.profit, 2)}} сом.</td>
                     <td>{{order.client?.name || '-'}}</td>
@@ -45,7 +45,7 @@ import {numberFormat} from "../../functions";
 export default {
     name: "OrdersIndexDesktop",
     methods: {numberFormat},
-    props: ['orders', 'showcasesCount'],
+    props: ['orders', 'suppliersCount'],
     components: {Pagination, Card}
 }
 </script>

@@ -22,17 +22,9 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => 'required',
             'name' => 'required|min:1|max:255',
             'username' => 'required|min:1|max:40',
             'password' => 'nullable|min:1|max:40',
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        return $this->merge([
-            'company_id' => auth()->user()->company_id
-        ]);
     }
 }

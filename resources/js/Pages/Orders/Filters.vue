@@ -19,9 +19,9 @@
         </div>
 
         <div class="mb-3">
-            <SelectShowcases
+            <SelectSuppliers
                 auto-position
-                v-model="form.showcase"
+                v-model="form.supplier"
             />
         </div>
 
@@ -69,7 +69,7 @@ import {useForm, Link} from "@inertiajs/inertia-vue3";
 import queryString from 'query-string';
 import {IconFilter, IconSearch, IconX} from "@tabler/icons-vue"
 import {size} from "lodash/collection";
-import SelectShowcases from "../../Shared/Form/SelectShowcases.vue";
+import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
 import TextInput from "../../Shared/Form/TextInput.vue";
 import SelectClients from "../../Shared/Form/SelectClients.vue";
 import BsModal from "../../Shared/BsModal.vue";
@@ -79,14 +79,14 @@ export default {
     components: {
         BsModal,
         SelectClients,
-        TextInput, SelectShowcases, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
+        TextInput, SelectSuppliers, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
     data() {
         return {
             isFiltered: false,
             form: useForm({
                 created_start: null,
                 created_end: null,
-                showcase: null,
+                supplier: null,
                 client: null,
                 query: null,
             })
@@ -104,7 +104,7 @@ export default {
             this.form.query = params['query']
             this.form.created_start = params['created_start']
             this.form.created_end = params['created_end']
-            this.form.showcase = params['showcase'] ? parseInt(params['showcase']) : null
+            this.form.supplier = params['supplier'] ? parseInt(params['supplier']) : null
             this.form.client = params['client'] ? parseInt(params['client']) : null
         },
         submit() {

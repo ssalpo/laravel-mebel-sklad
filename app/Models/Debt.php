@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\CurrentCompanyScope;
 use App\Models\Traits\DatesFormatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +16,6 @@ class Debt extends Model
     use HasFactory, SoftDeletes, DatesFormatable;
 
     protected $fillable = [
-        'company_id',
         'client_id',
         'created_by',
         'order_id',
@@ -34,11 +32,6 @@ class Debt extends Model
     protected $appends = [
         'created_at_formatted'
     ];
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new CurrentCompanyScope);
-    }
 
     public function scopeFilters($q, array $data = [])
     {

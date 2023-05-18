@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-auto text-muted">
                         <span class="badge badge-outline text-green">
-                            {{item.quantity}} {{item.unit}}
+                            {{item.quantity}}
                         </span>
                     </div>
                 </div>

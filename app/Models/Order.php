@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\CurrentCompanyScope;
 use App\Models\Traits\DatesFormatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,8 +16,7 @@ class Order extends Model
     use HasFactory, SoftDeletes, DatesFormatable;
 
     protected $fillable = [
-        'showcase_id',
-        'company_id',
+        'supplier_id',
         'user_id',
         'client_id',
         'amount',
@@ -39,16 +37,11 @@ class Order extends Model
         self::STATUS_CANCELED => 'Отменен',
     ];
 
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new CurrentCompanyScope);
-    }
-
     public function scopeFilter($q, $data): void
     {
         $q->when(
-            Arr::get($data, 'showcase'),
-            fn($q, $v) => $q->where('showcase_id', $v)
+            Arr::get($data, 'supplier'),
+            fn($q, $v) => $q->where('supplier_id', $v)
         );
 
         $q->when(
@@ -95,9 +88,9 @@ class Order extends Model
         $q->where('status', self::STATUS_SOLD);
     }
 
-    public function showcase(): BelongsTo
+    public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Showcase::class)->withTrashed();
+        return $this->belongsTo(Supplier::class)->withTrashed();
     }
 
     public function user(): BelongsTo
