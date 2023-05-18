@@ -65,6 +65,7 @@ import {size} from "lodash/collection";
 import TextInput from "../../Shared/Form/TextInput.vue";
 import SelectClients from "../../Shared/Form/SelectClients.vue";
 import BsModal from "../../Shared/BsModal.vue";
+import omit from "lodash/omit";
 
 export default {
     name: "DebtFilters",
@@ -90,7 +91,7 @@ export default {
         loadDefaultParams() {
             let params = queryString.parse(location.search);
 
-            this.isFiltered = size(params) > 0
+            this.isFiltered = size(omit(params)) > 0
 
             this.form.query = params['query']
             this.form.created_start = params['created_start']

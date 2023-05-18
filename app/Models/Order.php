@@ -43,7 +43,12 @@ class Order extends Model
             Arr::get($data, 'query'),
             fn($q, $v) => $q->where('id', $v)
                 ->orWhere('amount', $v)
-                ->orWhere('profit', $v)
+                ->orWhere('address', 'like', '%' . $v . '%')
+                ->orWhereHas(
+                    'client',
+                    fn($q) => $q->where('name', 'like', '%' . $v . '%')
+                        ->where('phone', 'like', '%' . $v . '%')
+                )
         );
 
         $q->when(

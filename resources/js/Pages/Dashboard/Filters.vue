@@ -57,6 +57,7 @@ import {IconFilter, IconSearch, IconX} from "@tabler/icons-vue"
 import {size} from "lodash/collection";
 import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
 import BsModal from "../../Shared/BsModal.vue";
+import omit from "lodash/omit";
 
 export default {
     name: "DashboardFilters",
@@ -78,7 +79,7 @@ export default {
         loadDefaultParams() {
             let params = queryString.parse(location.search);
 
-            this.isFiltered = size(params) > 0
+            this.isFiltered = size(omit(params)) > 0
 
             this.form.start = params['start']
             this.form.end = params['end']

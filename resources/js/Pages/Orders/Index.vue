@@ -1,17 +1,16 @@
 <template>
     <PageWrapper
+        header-inline
         header-title="Продажи"
-        header-pre-title="В списке отображается все приходы по товарам"
     >
 
         <template #headerActions>
-            <OrderFilters/>
-
-            <Link :href="route('orders.create')" class="btn btn-primary">
-                <IconCirclePlus :size="18" class="me-2" stroke-width="1.7"/>
-                Новый заказ
+            <Link :href="route('orders.create')" class="btn btn-primary btn-icon">
+                <IconCirclePlus :size="18" stroke-width="1.7"/>
             </Link>
         </template>
+
+        <OrderFiltersShort class="mb-3" />
 
         <card  card-body-class="px-3">
             <OrderItems :orders="orders.data" />
@@ -32,9 +31,14 @@ import OrderFilters from "./Filters.vue";
 import OrderItems from "../../Shared/Mobile/OrderItems.vue";
 import Pagination from "../../Shared/Pagination.vue";
 import Card from "../../Shared/Card.vue";
+import OrderFiltersShort from "./FiltersShort.vue";
+import queryString from 'query-string';
+import {size} from "lodash/collection";
+import omit from "lodash/omit";
 
 export default {
     components: {
+        OrderFiltersShort,
         Card,
         Pagination,
         OrderItems,
@@ -43,6 +47,11 @@ export default {
         PageWrapper,
         Link
     },
-    props: ['orders', 'shared']
+    props: ['orders', 'shared'],
+    computed:{
+        isFiltered() {
+            return size(omit(queryString.parse(location.search))) > 0
+        }
+    }
 }
 </script>

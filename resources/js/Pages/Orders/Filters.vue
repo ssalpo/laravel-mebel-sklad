@@ -5,9 +5,9 @@
         @submit="submit"
     >
         <template #btn="{show}">
-            <button class="btn btn-info px-2" @click="show">
-                <IconFilter :size="18" stroke-width="1.5"/>
-                Фильтр
+            <button class="btn btn-outline-info btn-sm px-2" @click="show">
+                <IconFilter :size="14" class="me-1" stroke-width="1.5"/>
+                расширенный
             </button>
         </template>
 
@@ -60,18 +60,19 @@ import Card from "../../Shared/Card.vue";
 import AirDatePicker from "../../Shared/Form/AirDatePicker.vue";
 import {useForm, Link} from "@inertiajs/inertia-vue3";
 import queryString from 'query-string';
-import {IconFilter, IconSearch, IconX} from "@tabler/icons-vue"
+import {IconFilter, IconX} from "@tabler/icons-vue"
 import {size} from "lodash/collection";
 import TextInput from "../../Shared/Form/TextInput.vue";
 import SelectClients from "../../Shared/Form/SelectClients.vue";
 import BsModal from "../../Shared/BsModal.vue";
+import omit from "lodash/omit";
 
 export default {
     name: "OrderFilters",
     components: {
         BsModal,
         SelectClients,
-        TextInput, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
+        TextInput, IconFilter, AirDatePicker, Card, IconX, Link},
     data() {
         return {
             isFiltered: false,
@@ -90,7 +91,7 @@ export default {
         loadDefaultParams() {
             let params = queryString.parse(location.search);
 
-            this.isFiltered = size(params) > 0
+            this.isFiltered = size(omit(params)) > 0
 
             this.form.query = params['query']
             this.form.created_start = params['created_start']
