@@ -22,7 +22,7 @@ export default defineConfig({
                 scope: "/",
                 id: "/",
                 start_url: '/',
-                name: "Склад ПРО 1.0",
+                name: "Учет Мебель 777",
                 display: "standalone",
                 orientation: "portrait",
                 icons: [
