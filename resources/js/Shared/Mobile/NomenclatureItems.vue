@@ -26,7 +26,7 @@
 import {Link} from "@inertiajs/inertia-vue3";
 
 export default {
-    name: "NomenclatureOperationItems",
+    name: "NomenclatureItems",
     components: {Link},
     props: ['items']
 }

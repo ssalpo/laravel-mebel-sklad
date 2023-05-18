@@ -1,6 +1,6 @@
 <template>
     <card>
-        <NomenclatureOperationItems
+        <NomenclatureItems
             :items="items"
         />
 
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import NomenclatureOperationItems from "../../Shared/Mobile/NomenclatureOperationItems.vue";
+import NomenclatureItems from "../../Shared/Mobile/NomenclatureItems.vue";
 import Card from "../../Shared/Card.vue";
 import Pagination from "../../Shared/Pagination.vue";
 
 export default {
     name: "NomenclatureArrivalsIndexMobile",
-    components: {Pagination, Card, NomenclatureOperationItems},
+    components: {Pagination, Card, NomenclatureItems},
     props: {
         nomenclatureArrivals: {
             type: Array,

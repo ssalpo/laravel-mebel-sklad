@@ -9,7 +9,7 @@
 
             <h1 class="navbar-brand navbar-brand-autodark d-none d-sm-inline-flex" style="font-size: 18px">
                 <IconBuilding :size="28" class="me-2" stroke-width="2" />
-                СКЛАД ПРО 1.0
+                Мебель 777
             </h1>
 
             <div class="navbar-nav flex-row d-lg-none">
@@ -64,7 +64,7 @@
                             </span>
 
                             <span class="nav-link-title">
-                                Остатки
+                                Остатки на складе
                             </span>
                         </Link>
                     </li>
@@ -79,48 +79,16 @@
                             </span>
                         </Link>
                     </li>
-                    <li class="nav-item" :class="{active: storehouseIsActive}">
-                        <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
-                           data-bs-auto-close="false" role="button" aria-expanded="true">
-                              <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <li class="nav-item" :class="{active: this.$page.component.startsWith('NomenclatureArrivals')}">
+                        <Link class="nav-link" :href="route('nomenclature-arrivals.index')">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <IconBuildingStore :size="24" stroke-width="1.5"/>
-                              </span>
+                            </span>
 
                             <span class="nav-link-title">
-                              Склад
+                                Приход на склад
                             </span>
-                        </a>
-
-                        <div class="dropdown-menu" :class="{show: storehouseIsActive}">
-                            <div class="dropdown-menu-columns">
-                                <div class="dropdown-menu-column">
-                                    <Link
-                                        class="dropdown-item"
-                                        :class="{active: $page.component.startsWith('NomenclatureArrivals')}"
-                                        :href="route('nomenclature-arrivals.index')"
-                                    >
-                                        Приход
-                                    </Link>
-
-                                    <Link
-                                        class="dropdown-item"
-                                        :class="{active: $page.component.startsWith('NomenclatureOperation') && queryParams('type') == 1}"
-                                        :href="route('nomenclature-operations.index', {type: 1})"
-                                    >
-                                        Списание
-                                    </Link>
-
-                                    <Link
-                                        class="dropdown-item"
-                                        :class="{active: $page.component.startsWith('NomenclatureOperation') && queryParams('type') == 2}"
-                                        :href="route('nomenclature-operations.index', {type: 2})"
-                                    >
-                                        Возврат
-                                    </Link>
-
-                                </div>
-                            </div>
-                        </div>
+                        </Link>
                     </li>
                     <li class="nav-item" :class="{active: directoriesIsActive}">
                         <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
@@ -219,8 +187,7 @@ export default {
                 this.$page.component.startsWith('Clients');
         },
         storehouseIsActive() {
-            return this.$page.component.startsWith('NomenclatureArrivals') ||
-                this.$page.component.startsWith('NomenclatureOperations');
+            return this.$page.component.startsWith('NomenclatureArrivals');
         }
     },
     methods: {

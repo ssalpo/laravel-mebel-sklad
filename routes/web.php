@@ -8,7 +8,6 @@ use App\Http\Controllers\DebtController;
 use App\Http\Controllers\DebtPaymentController;
 use App\Http\Controllers\NomenclatureArrivalController;
 use App\Http\Controllers\NomenclatureController;
-use App\Http\Controllers\NomenclatureOperationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\StorehouseController;
@@ -32,8 +31,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
     Route::resource('orders', OrderController::class);
-
-    Route::resource('nomenclature-operations', NomenclatureOperationController::class);
 
     Route::resource('debts/{debt}/payments', DebtPaymentController::class, ['as' => 'debts']);
 
