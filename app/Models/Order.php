@@ -22,7 +22,14 @@ class Order extends Model
         'profit',
         'status',
         'address',
+        'deposit_amount',
         'cancel_reason',
+    ];
+
+    protected $casts = [
+        'deposit_amount' => 'double',
+        'profit' => 'double',
+        'amount' => 'double',
     ];
 
     protected $appends = [
@@ -101,5 +108,10 @@ class Order extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function markAsPaid()
+    {
+        return $this->update(['deposit_amount' => 0]);
     }
 }

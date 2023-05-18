@@ -7,6 +7,7 @@ use App\Models\Order;
 use Illuminate\Database\Eloquent\Collection as ModelCollection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class OrderService
 {
@@ -20,8 +21,15 @@ class OrderService
 
             $totals = $this->calculateTotals($data, $nomenclatures);
 
+            if(isset($data['deposit_amount']) && $data['deposit_amount'] >= $totals['amount']) {
+                throw ValidationException::withMessages([
+                    'deposit_amount' => 'Сумма взноса должно быть меньше общей суммы заказа.',
+                ]);
+            }
+
             $order = Order::create(array_merge(
                 [
+                    'deposit_amount' => $data['deposit_amount'] ?? 0,
                     'status' => Order::STATUS_SOLD,
                     'profit' => $totals['profit'],
                     'amount' => $totals['amount'],

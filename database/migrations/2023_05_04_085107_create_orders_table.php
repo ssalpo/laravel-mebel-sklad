@@ -18,6 +18,7 @@ return new class extends Migration
             $table->double('amount')->default(0);
             $table->string('address')->nullable();
             $table->double('profit')->default(0);
+            $table->double('deposit_amount')->default(0);
             $table->tinyInteger('status')->default(\App\Models\Order::STATUS_SOLD);
             $table->string('cancel_reason')->nullable();
             $table->softDeletes();

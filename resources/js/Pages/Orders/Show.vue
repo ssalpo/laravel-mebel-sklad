@@ -17,6 +17,24 @@
                             </td>
                         </tr>
                         <tr>
+                            <td class="text-start text-sm-end fw-bold">Сумма взноса</td>
+                            <td>{{numberFormat(order.deposit_amount)}} сом.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-start text-sm-end fw-bold">Остаток для оплаты</td>
+                            <td>
+                                <div v-if="order.deposit_amount > 0">
+                                    <div class="mb-2">
+                                        {{numberFormat(order.amount - order.deposit_amount)}} сом.
+                                    </div>
+                                    <Link class="btn btn-sm btn-success" :href="route('orders.paid', order.id)" method="post" as="button">оплатил</Link>
+                                </div>
+                                <div v-else class="text-success">
+                                    Оплатил
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="text-start text-sm-end fw-bold">Адрес</td>
                             <td>{{order.address}}</td>
                         </tr>

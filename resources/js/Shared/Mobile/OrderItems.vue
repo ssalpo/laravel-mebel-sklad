@@ -15,7 +15,11 @@
                             </div>
                         </div>
                         <div class="text-muted my-1">
-                            <small v-html="[order.address, order.client?.name ? `<strong>${order.client?.name}</strong>` : null].filter(Boolean).join(', ')"></small>
+                            <small class="d-block" v-html="[order.address, order.client?.name ? `<strong>${order.client?.name}</strong>` : null].filter(Boolean).join(', ')"></small>
+
+                            <small class="badge bg-red-lt mt-2" v-if="order.deposit_amount > 0">
+                                Остаток: {{numberFormat(order.amount - order.deposit_amount, 2)}} сом.
+                            </small>
                         </div>
                         <div class="row align-items-center">
                             <div class="col">

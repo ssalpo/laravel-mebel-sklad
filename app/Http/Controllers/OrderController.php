@@ -67,4 +67,13 @@ class OrderController extends Controller
 
         return back();
     }
+
+    public function paid(Order $order)
+    {
+        $order->markAsPaid();
+
+        Toast::success('Вся сумма заказа успешно оплачена.');
+
+        return back();
+    }
 }

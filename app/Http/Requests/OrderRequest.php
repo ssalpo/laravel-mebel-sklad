@@ -26,6 +26,7 @@ class OrderRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'client_id' => 'nullable|exists:clients,id',
             'address' => 'required|string|min:2|max:255',
+            'deposit_amount' => 'nullable|gt:0|regex:/^\d+(\.\d{1,3})?$/',
             'orderItems' => 'required|array',
             'orderItems.*.nomenclature_id' => 'required|exists:nomenclatures,id',
             'orderItems.*.quantity' => 'required|integer|gt:0',

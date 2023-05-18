@@ -26,6 +26,15 @@
                 </div>
 
                 <div class="col col-sm-6 offset-sm-3 mb-3">
+                    <TextInput
+                        label="Сумма взноса"
+                        placeholder="Введите сумму взноса"
+                        v-model="form.deposit_amount"
+                        :invalid-text="form.errors.deposit_amount"
+                    />
+                </div>
+
+                <div class="col col-sm-6 offset-sm-3 mb-3">
                     <label class="form-label required">Товары</label>
 
                     <OrderNomenclatures
@@ -117,6 +126,7 @@ export default {
             form: useForm({
                 client_id: null,
                 address: null,
+                deposit_amount: null,
                 orderItems: []
             })
         }
