@@ -21,7 +21,7 @@ class OrderService
 
             $totals = $this->calculateTotals($data, $nomenclatures);
 
-            if(isset($data['deposit_amount']) && $data['deposit_amount'] >= $totals['amount']) {
+            if (isset($data['deposit_amount']) && $data['deposit_amount'] >= $totals['amount']) {
                 throw ValidationException::withMessages([
                     'deposit_amount' => 'Сумма взноса должно быть меньше общей суммы заказа.',
                 ]);
@@ -80,6 +80,26 @@ class OrderService
             'cancel_reason' => $cancelReason,
             'status' => Order::STATUS_CANCELED
         ]);
+
+        return $order;
+    }
+
+    public function changeBaseInfo(int $orderId, array $data): Order
+    {
+        $order = Order::findOrFail($orderId);
+
+        if (isset($data['deposit_amount']) && $data['deposit_amount'] >= $order->amount) {
+            throw ValidationException::withMessages([
+                'deposit_amount' => 'Сумма взноса должно быть меньше общей суммы заказа.',
+            ]);
+        }
+
+        $order->update(
+            Arr::except($data, 'orderItems'),
+            [
+                'deposit_amount' => $data['deposit_amount'] ?? 0,
+            ]
+        );
 
         return $order;
     }

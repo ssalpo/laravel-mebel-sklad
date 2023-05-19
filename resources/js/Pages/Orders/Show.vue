@@ -1,8 +1,15 @@
 <template>
     <PageWrapper
+        header-inline
         :header-title="`Заказ №${order.id}`"
         :back-url="route('orders.index')"
     >
+        <template #headerActions>
+            <EditLinkBtn
+                :url="route('orders.edit_base_info', order.id)"
+            />
+        </template>
+
         <card class="mb-3" without-body>
             <div class="table-responsive">
                 <table class="table table-vcenter text-nowrap card-table">
@@ -110,9 +117,11 @@ import {Link} from "@inertiajs/inertia-vue3";
 import Card from "../../Shared/Card.vue";
 import {numberFormat} from "../../functions";
 import OrderCancelModal from "../../Shared/Modals/OrderCancelModal.vue";
+import DeleteBtn from "../../Shared/DeleteBtn.vue";
+import EditLinkBtn from "../../Shared/EditLinkBtn.vue";
 
 export default {
-    components: {OrderCancelModal, Card, PageWrapper, Link},
+    components: {EditLinkBtn, DeleteBtn, OrderCancelModal, Card, PageWrapper, Link},
     props: ['order', 'shared'],
     methods: {
         numberFormat

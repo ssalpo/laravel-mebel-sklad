@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderCancelRequest;
+use App\Http\Requests\OrderChangeBaseInfoRequest;
 use App\Http\Requests\OrderRequest;
 use App\Models\Nomenclature;
 use App\Models\Order;
@@ -74,5 +75,19 @@ class OrderController extends Controller
         Toast::success('Вся сумма заказа успешно оплачена.');
 
         return back();
+    }
+
+    public function editBaseInfo(Order $order)
+    {
+        return inertia('Orders/EditBaseInfo', compact('order'));
+    }
+
+    public function changeBaseInfo(int $orderId, OrderChangeBaseInfoRequest $request)
+    {
+        $this->orderService->changeBaseInfo($orderId, $request->validated());
+
+        Toast::success('Данные успешно изменены.');
+
+        return to_route('orders.show', $orderId);
     }
 }
