@@ -179,7 +179,8 @@ export default {
         directoriesIsActive() {
             return this.$page.component.startsWith('Suppliers') ||
                 this.$page.component.startsWith('Users') ||
-                this.$page.component.startsWith('Nomenclatures');
+                this.$page.component.startsWith('Nomenclatures') ||
+                this.$page.component.startsWith('Regions');
         },
         storehouseIsActive() {
             return this.$page.component.startsWith('NomenclatureArrivals');
