@@ -10,7 +10,8 @@ const page = usePage();
 Inertia.on('finish', () => {
     if (page.props.value.toast?.message) {
         toast(page.props.value.toast.message, {
-            type: page.props.value.toast.type
+            type: page.props.value.toast.type,
+            timeout: 1500
         })
     }
 });
