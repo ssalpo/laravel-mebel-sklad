@@ -15,6 +15,8 @@
         <card  card-body-class="px-3">
             <OrderItems :orders="orders.data" />
 
+            <EmptyResult v-if="!orders.data.length" />
+
             <template #cardFooter v-if="orders.links.length > 3">
                 <Pagination class="float-end" :links="orders.links"/>
             </template>
@@ -35,9 +37,11 @@ import OrderFiltersShort from "./FiltersShort.vue";
 import queryString from 'query-string';
 import {size} from "lodash/collection";
 import omit from "lodash/omit";
+import EmptyResult from "../../Shared/EmptyResult.vue";
 
 export default {
     components: {
+        EmptyResult,
         OrderFiltersShort,
         Card,
         Pagination,

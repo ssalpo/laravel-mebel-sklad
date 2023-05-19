@@ -13,7 +13,9 @@
 
 
         <card without-body>
-            <div class="table-responsive">
+            <EmptyResult v-if="!nomenclatures.data.length" />
+
+            <div class="table-responsive" v-if="nomenclatures.data.length > 0">
                 <table class="table table-vcenter text-nowrap card-table">
                     <thead>
                     <tr>
@@ -73,9 +75,11 @@ import Pagination from "../../Shared/Pagination.vue";
 import EditLinkBtn from "../../Shared/EditLinkBtn.vue";
 import {IconCirclePlus} from "@tabler/icons-vue";
 import NomenclatureBarcodeChangeModal from "../../Shared/Modals/NomenclatureBarcodeChangeModal.vue";
+import EmptyResult from "../../Shared/EmptyResult.vue";
 
 export default {
     components: {
+        EmptyResult,
         NomenclatureBarcodeChangeModal,
         IconCirclePlus, EditLinkBtn, Pagination, DeleteBtn, Card, PageWrapper, Link},
     props: ['nomenclatures'],

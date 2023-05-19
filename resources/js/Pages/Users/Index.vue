@@ -12,7 +12,9 @@
 
 
         <card without-body>
-            <div class="table-responsive">
+            <EmptyResult v-if="!users.length" />
+
+            <div class="table-responsive" v-if="users.length > 0">
                 <table class="table table-vcenter text-nowrap card-table">
                     <thead>
                     <tr>
@@ -57,9 +59,10 @@ import Card from "../../Shared/Card.vue";
 import DeleteBtn from "../../Shared/DeleteBtn.vue";
 import EditLinkBtn from "../../Shared/EditLinkBtn.vue";
 import {IconCirclePlus} from "@tabler/icons-vue";
+import EmptyResult from "../../Shared/EmptyResult.vue";
 
 export default {
-    components: {IconCirclePlus, EditLinkBtn, DeleteBtn, Card, PageWrapper, Link},
+    components: {EmptyResult, IconCirclePlus, EditLinkBtn, DeleteBtn, Card, PageWrapper, Link},
     props: ['users']
 }
 </script>
