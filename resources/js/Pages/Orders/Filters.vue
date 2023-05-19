@@ -13,7 +13,7 @@
 
         <div class="mb-3">
             <TextInput
-                placeholder="Введите ID или сумму заказа"
+                placeholder="ID, сумму, адрес или имя клиента"
                 v-model="form.query"
             />
         </div>
