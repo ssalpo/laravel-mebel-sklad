@@ -4,7 +4,9 @@
         header-pre-title="В списке отображается все ваши остатки по товарам"
     >
         <card without-body>
-            <div class="table-responsive">
+            <EmptyResult v-if="!balances.length" />
+
+            <div class="table-responsive" v-if="balances.length > 0">
                 <table class="table table-vcenter card-table">
                     <thead>
                     <tr>
@@ -30,10 +32,11 @@ import PageWrapper from "../Shared/PageWrapper.vue";
 import DeleteBtn from "../Shared/DeleteBtn.vue";
 import Card from "../Shared/Card.vue";
 import {Link} from "@inertiajs/inertia-vue3";
+import EmptyResult from "../Shared/EmptyResult.vue";
 
 export default {
     name: "StorehouseBalance",
-    components: {Link, Card, DeleteBtn, PageWrapper},
+    components: {EmptyResult, Link, Card, DeleteBtn, PageWrapper},
     props: ['balances']
 }
 </script>
