@@ -110,6 +110,11 @@
                                         Поставщики
                                     </Link>
                                     <Link class="dropdown-item"
+                                          :class="{active: $page.component.startsWith('Regions')}"
+                                          :href="route('regions.index')">
+                                        Регионы
+                                    </Link>
+                                    <Link class="dropdown-item"
                                           :class="{active: $page.component.startsWith('Users')}"
                                           :href="route('users.index')">
                                         Пользователи

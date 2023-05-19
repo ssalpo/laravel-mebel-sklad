@@ -17,7 +17,7 @@ class AnalyticService
         $dateTo = $to ? Carbon::parse($to)->endOfDay() : ($dateFrom ? $dateFrom->clone()->endOfDay() : null);
 
         return Order::whereBetween('created_at', [$dateFrom, $dateTo])
-            ->filter(request())
+            ->filter($this->filters)
             ->whereStatus($status)
             ->sum('profit');
     }
@@ -28,7 +28,7 @@ class AnalyticService
         $dateTo = $to ? Carbon::parse($to)->endOfDay() : ($dateFrom ? $dateFrom->clone()->endOfDay() : null);
 
         return Order::whereBetween('created_at', [$dateFrom, $dateTo])
-            ->filter(request())
+            ->filter($this->filters)
             ->whereStatus($status)
             ->sum('amount');
     }
@@ -49,6 +49,10 @@ class AnalyticService
                 DB::raw('orders o'),
                 fn($q) => $q->on('o.id', '=', 'o_i.order_id')
                     ->where('o.status', $status)
+                    ->when(
+                        Arr::get($this->filters, 'region'),
+                        fn($q, $v) => $q->where('o.region_id', $v)
+                    )
                     ->when(
                         Arr::get($this->filters, 'user'),
                         fn($q, $v) => $q->where('o.user_id', $v)

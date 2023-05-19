@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NomenclatureArrivalController;
 use App\Http\Controllers\NomenclatureController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\StorehouseController;
 use App\Http\Controllers\UserController;
@@ -16,6 +17,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::resource('suppliers', SupplierController::class);
+
+    Route::resource('regions', RegionController::class);
 
     Route::resource('users', UserController::class);
 
@@ -35,6 +38,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::group(['prefix' => 'autocomplete', 'as' => 'autocomplete.'], static function () {
     Route::get('nomenclatures', [AutocompleteController::class, 'nomenclatures'])->name('nomenclatures');
     Route::get('suppliers', [AutocompleteController::class, 'suppliers'])->name('suppliers');
+    Route::get('regions', [AutocompleteController::class, 'regions'])->name('regions');
 })->middleware(['auth:sanctum']);
 
 // Auth

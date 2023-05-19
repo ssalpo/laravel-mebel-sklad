@@ -20,7 +20,8 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::filter(request()?->all())
+        $orders = Order::with('region')
+            ->filter(request()?->all())
             ->orderBy('created_at', 'DESC')
             ->paginate()
             ->onEachSide(0);
@@ -52,7 +53,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->load(['orderItems.nomenclature']);
+        $order->load(['orderItems.nomenclature', 'region']);
 
         return inertia('Orders/Show', compact('order'));
     }

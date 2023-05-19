@@ -12,7 +12,7 @@
             </button>
         </template>
 
-        <div class="input-group">
+        <div class="input-group mb-3">
             <AirDatePicker
                 :as-modal="isMobile"
                 v-model="form.start"
@@ -23,6 +23,14 @@
                 :as-modal="isMobile"
                 v-model="form.end"
                 placeholder="Дата конечная"
+            />
+        </div>
+
+        <div>
+            <SelectRegions
+                v-model="form.region"
+                :value="form.region"
+                :invalid-text="form.errors.region"
             />
         </div>
 
@@ -52,16 +60,18 @@ import {size} from "lodash/collection";
 import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
 import BsModal from "../../Shared/BsModal.vue";
 import omit from "lodash/omit";
+import SelectRegions from "../../Shared/Form/SelectRegions.vue";
 
 export default {
     name: "DashboardFilters",
-    components: {BsModal, SelectSuppliers, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
+    components: {SelectRegions, BsModal, SelectSuppliers, IconFilter, AirDatePicker, Card, IconSearch, IconX, Link},
     data() {
         return {
             isFiltered: false,
             form: useForm({
                 start: null,
                 end: null,
+                region: null,
             })
         }
     },
@@ -77,6 +87,7 @@ export default {
             this.form.start = params['start']
             this.form.end = params['end']
             this.form.supplier = params['supplier'] ? parseInt(params['supplier']) : null
+            this.form.region = params['region'] ? parseInt(params['region']) : null
         },
         submit() {
             this.form.get(route('dashboard.index'))

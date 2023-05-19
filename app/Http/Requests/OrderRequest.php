@@ -24,6 +24,7 @@ class OrderRequest extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
+            'region_id' => 'required|exists:regions,id',
             'address' => 'required|string|min:2|max:255',
             'client_name' => 'required|string|min:2|max:255',
             'phone_number' => 'required|string|min:2|max:255',

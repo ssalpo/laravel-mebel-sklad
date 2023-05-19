@@ -35,6 +35,18 @@
                 </div>
 
                 <div class="col col-sm-6 offset-sm-3 mb-3">
+                    <SelectRegions
+                        ref="selectRegions"
+                        label="Регион"
+                        label-required
+                        v-model="form.region_id"
+                        :invalid-text="form.errors.region_id"
+                    />
+
+                    <NewRegionModal @success="refreshRegions" />
+                </div>
+
+                <div class="col col-sm-6 offset-sm-3 mb-3">
                     <TextInput
                         label="Сумма взноса"
                         placeholder="Введите сумму взноса"
@@ -113,10 +125,14 @@ import {numberFormat} from "../../functions";
 import OrderNomenclatures from "../../Shared/Form/OrderNomenclatures.vue";
 import BarcodeScannerModal from "../../Shared/Modals/BarcodeScannerModal.vue";
 import find from "lodash/find";
+import SelectRegions from "../../Shared/Form/SelectRegions.vue";
+import NewRegionModal from "../../Shared/Modals/NewRegionModal.vue";
 
 export default {
     props: ['nomenclatures'],
     components: {
+        NewRegionModal,
+        SelectRegions,
         BarcodeScannerModal,
         OrderNomenclatures,
         NumericField,
@@ -132,6 +148,7 @@ export default {
                 client_name: null,
                 phone_number: null,
                 address: null,
+                region_id: null,
                 deposit_amount: null,
                 orderItems: []
             })
@@ -174,6 +191,13 @@ export default {
         },
         removeOrderItem(index) {
             this.form.orderItems.splice(index, 1)
+        },
+        refreshRegions(region) {
+            this.$refs.selectRegions.refreshData()
+
+            this.form.region_id = parseInt(region.id)
+
+            this.form.clearErrors()
         }
     }
 }

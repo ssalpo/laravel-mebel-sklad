@@ -18,7 +18,7 @@
             />
         </div>
 
-        <div class="input-group">
+        <div class="input-group mb-3">
             <AirDatePicker
                 :as-modal="isMobile"
                 v-model="form.created_start"
@@ -29,6 +29,14 @@
                 :as-modal="isMobile"
                 v-model="form.created_end"
                 placeholder="Дата конечная"
+            />
+        </div>
+
+        <div class="mb-3">
+            <SelectRegions
+                v-model="form.region"
+                :value="form.region"
+                :invalid-text="form.errors.region"
             />
         </div>
 
@@ -58,10 +66,12 @@ import {size} from "lodash/collection";
 import TextInput from "../../Shared/Form/TextInput.vue";
 import BsModal from "../../Shared/BsModal.vue";
 import omit from "lodash/omit";
+import SelectRegions from "../../Shared/Form/SelectRegions.vue";
 
 export default {
     name: "OrderFilters",
     components: {
+        SelectRegions,
         BsModal,
         TextInput, IconFilter, AirDatePicker, Card, IconX, Link},
     data() {
@@ -71,6 +81,7 @@ export default {
                 created_start: null,
                 created_end: null,
                 query: null,
+                region: null,
             })
         }
     },
@@ -86,6 +97,7 @@ export default {
             this.form.query = params['query']
             this.form.created_start = params['created_start']
             this.form.created_end = params['created_end']
+            this.form.region = params['region'] ? parseInt(params['region']) : null
         },
         submit() {
             this.form.get(route('orders.index'))

@@ -17,6 +17,7 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
+        'region_id',
         'amount',
         'profit',
         'status',
@@ -53,7 +54,7 @@ class Order extends Model
             fn($q, $v) => $q->where('id', $v)
                 ->orWhere('amount', $v)
                 ->orWhere('address', 'like', '%' . $v . '%')
-                ->orWhere('phone', 'like', '%' . $v . '%')
+                ->orWhere('phone_number', 'like', '%' . $v . '%')
                 ->orWhere('client_name', 'like', '%' . $v . '%')
         );
 
@@ -82,11 +83,21 @@ class Order extends Model
             Arr::get($data, 'id'),
             fn($q, $v) => $q->where('id', $v)
         );
+
+        $q->when(
+            Arr::get($data, 'region'),
+            fn($q, $v) => $q->where('region_id', $v)
+        );
     }
 
     public function scopeSold($q): void
     {
         $q->where('status', self::STATUS_SOLD);
+    }
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class)->withTrashed();
     }
 
     public function user(): BelongsTo

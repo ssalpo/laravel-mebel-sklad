@@ -39,6 +39,10 @@
                             <td>{{order.address}}</td>
                         </tr>
                         <tr>
+                            <td class="text-start text-sm-end fw-bold">Регион</td>
+                            <td>{{order.region.name}}</td>
+                        </tr>
+                        <tr>
                             <td class="text-start text-sm-end fw-bold">
                                 Общая сумма
                             </td>

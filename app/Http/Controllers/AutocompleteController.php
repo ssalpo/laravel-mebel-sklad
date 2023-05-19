@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nomenclature;
+use App\Models\Region;
 use App\Models\Supplier;
 
 class AutocompleteController extends Controller
@@ -22,6 +23,16 @@ class AutocompleteController extends Controller
     {
         return $this->transformCollection(
             Supplier::when(
+                request('q'),
+                static fn($q, $v) => $q->where('name', 'like', '%' . $v . '%')
+            )->get()
+        );
+    }
+
+    public function regions()
+    {
+        return $this->transformCollection(
+            Region::when(
                 request('q'),
                 static fn($q, $v) => $q->where('name', 'like', '%' . $v . '%')
             )->get()
