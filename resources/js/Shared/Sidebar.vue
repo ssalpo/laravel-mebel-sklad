@@ -100,11 +100,6 @@
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
                                     <Link class="dropdown-item"
-                                          :class="{active: $page.component.startsWith('Clients')}"
-                                          :href="route('clients.index')">
-                                        Клиенты
-                                    </Link>
-                                    <Link class="dropdown-item"
                                           :class="{active: $page.component.startsWith('Nomenclatures')}"
                                           :href="route('nomenclatures.index')">
                                         Товар
@@ -179,8 +174,7 @@ export default {
         directoriesIsActive() {
             return this.$page.component.startsWith('Suppliers') ||
                 this.$page.component.startsWith('Users') ||
-                this.$page.component.startsWith('Nomenclatures') ||
-                this.$page.component.startsWith('Clients');
+                this.$page.component.startsWith('Nomenclatures');
         },
         storehouseIsActive() {
             return this.$page.component.startsWith('NomenclatureArrivals');

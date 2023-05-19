@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id()->from(1000);
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('client_id')->nullable()->constrained();
             $table->double('amount')->default(0);
             $table->string('address')->nullable();
+            $table->string('client_name')->nullable();
+            $table->string('phone_number')->nullable();
             $table->double('profit')->default(0);
             $table->double('deposit_amount')->default(0);
             $table->tinyInteger('status')->default(\App\Models\Order::STATUS_SOLD);

@@ -10,9 +10,9 @@
                         <tr>
                             <td class="text-start text-sm-end fw-bold">Клиент</td>
                             <td>
-                                <div>{{order.client?.name || '-'}}</div>
-                                <div v-if="order.client?.phone" class="mt-2">
-                                    <a :href="`tel:${order.client.phone}`">{{order.client.phone}}</a>
+                                <div>{{order.client_name || '-'}}</div>
+                                <div v-if="order.phone_number" class="mt-2">
+                                    <a :href="`tel:${order.phone_number}`">{{order.phone_number}}</a>
                                 </div>
                             </td>
                         </tr>
@@ -87,7 +87,8 @@
                     <tbody>
                     <tr v-for="item in order.order_items">
                         <td>{{item.nomenclature.name}}</td>
-                        <td>{{item.price_for_sale}} сом.</td>
+                        <td>{{numberFormat(item.price_for_sale)}} сом.</td>
+                        <td>{{item.quantity}}</td>
                         <td>{{numberFormat(item.total_amount, 2)}} сом.</td>
                         <td>{{numberFormat(item.total_profit, 2)}} сом.</td>
                     </tr>

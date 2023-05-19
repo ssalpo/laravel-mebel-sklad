@@ -2,10 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AutocompleteController;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DebtController;
-use App\Http\Controllers\DebtPaymentController;
 use App\Http\Controllers\NomenclatureArrivalController;
 use App\Http\Controllers\NomenclatureController;
 use App\Http\Controllers\OrderController;
@@ -25,8 +22,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('nomenclatures/{nomenclature}/change-barcode', [NomenclatureController::class, 'changeBarcode'])->name('nomenclatures-nomenclature.change-barcode');
     Route::resource('nomenclatures', NomenclatureController::class);
 
-    Route::resource('clients', ClientController::class);
-
     Route::resource('nomenclature-arrivals', NomenclatureArrivalController::class);
 
     Route::post('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
@@ -39,7 +34,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 // Autocomplete routes
 Route::group(['prefix' => 'autocomplete', 'as' => 'autocomplete.'], static function () {
     Route::get('nomenclatures', [AutocompleteController::class, 'nomenclatures'])->name('nomenclatures');
-    Route::get('clients', [AutocompleteController::class, 'clients'])->name('clients');
     Route::get('suppliers', [AutocompleteController::class, 'suppliers'])->name('suppliers');
 })->middleware(['auth:sanctum']);
 

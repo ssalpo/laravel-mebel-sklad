@@ -20,8 +20,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::with(['client'])
-            ->filter(request()?->all())
+        $orders = Order::filter(request()?->all())
             ->orderBy('created_at', 'DESC')
             ->paginate()
             ->onEachSide(0);
@@ -31,8 +30,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        $nomenclatures = Nomenclature::whereHas('nomenclatureArrivals')
-            ->get()
+        $nomenclatures = Nomenclature::all()
             ->transform(
                 fn($m) => [
                     'id' => $m->id,
@@ -54,7 +52,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->load(['client', 'orderItems.nomenclature']);
+        $order->load(['orderItems.nomenclature']);
 
         return inertia('Orders/Show', compact('order'));
     }

@@ -29,12 +29,14 @@ class OrderService
 
             $order = Order::create(array_merge(
                 [
-                    'deposit_amount' => $data['deposit_amount'] ?? 0,
                     'status' => Order::STATUS_SOLD,
                     'profit' => $totals['profit'],
                     'amount' => $totals['amount'],
                 ],
-                Arr::except($data, 'orderItems')
+                Arr::except($data, 'orderItems'),
+                [
+                    'deposit_amount' => $data['deposit_amount'] ?? 0,
+                ]
             ));
 
             foreach ($data['orderItems'] as $item) {

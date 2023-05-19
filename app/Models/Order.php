@@ -17,10 +17,12 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'client_id',
         'amount',
         'profit',
         'status',
+        'client_name',
+        'phone_number',
+        'phone',
         'address',
         'deposit_amount',
         'cancel_reason',
@@ -51,11 +53,8 @@ class Order extends Model
             fn($q, $v) => $q->where('id', $v)
                 ->orWhere('amount', $v)
                 ->orWhere('address', 'like', '%' . $v . '%')
-                ->orWhereHas(
-                    'client',
-                    fn($q) => $q->where('name', 'like', '%' . $v . '%')
-                        ->where('phone', 'like', '%' . $v . '%')
-                )
+                ->orWhere('phone', 'like', '%' . $v . '%')
+                ->orWhere('client_name', 'like', '%' . $v . '%')
         );
 
         $q->when(
@@ -72,11 +71,6 @@ class Order extends Model
 
                 $q->whereBetween('created_at', [$dateFrom, $dateTo]);
             }
-        );
-
-        $q->when(
-            Arr::get($data, 'client'),
-            fn($q, $v) => $q->where('client_id', $v)
         );
 
         $q->when(
@@ -98,11 +92,6 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withTrashed();
-    }
-
-    public function client(): BelongsTo
-    {
-        return $this->belongsTo(Client::class)->withTrashed();
     }
 
     public function orderItems(): HasMany

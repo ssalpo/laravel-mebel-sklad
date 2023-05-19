@@ -5,14 +5,23 @@
         <form @submit.prevent="submit">
             <card>
                 <div class="col col-sm-6 offset-sm-3 mb-3">
-                    <SelectClients
-                        ref="selectClients"
-                        v-model="form.client_id"
-                        :invalid-text="form.errors.client_id"
-                        label="Клиент"
+                    <TextInput
+                        label="Имя клиента"
+                        label-required
+                        placeholder="Введите имя клиента"
+                        v-model="form.client_name"
+                        :invalid-text="form.errors.client_name"
                     />
+                </div>
 
-                    <NewClientModal @success="setClient" />
+                <div class="col col-sm-6 offset-sm-3 mb-3">
+                    <TextInput
+                        label="Номер телефона"
+                        label-required
+                        placeholder="Номер телефона"
+                        v-model="form.phone_number"
+                        :invalid-text="form.errors.phone_number"
+                    />
                 </div>
 
                 <div class="col col-sm-6 offset-sm-3 mb-3">
@@ -101,9 +110,7 @@ import keyBy from "lodash/keyBy";
 import compact from "lodash/compact";
 import map from "lodash/map";
 import {numberFormat} from "../../functions";
-import SelectClients from "../../Shared/Form/SelectClients.vue";
 import OrderNomenclatures from "../../Shared/Form/OrderNomenclatures.vue";
-import NewClientModal from "../../Shared/Modals/NewClientModal.vue";
 import BarcodeScannerModal from "../../Shared/Modals/BarcodeScannerModal.vue";
 import find from "lodash/find";
 
@@ -111,9 +118,7 @@ export default {
     props: ['nomenclatures'],
     components: {
         BarcodeScannerModal,
-        NewClientModal,
         OrderNomenclatures,
-        SelectClients,
         NumericField,
         TextInput,
         Card,
@@ -124,7 +129,8 @@ export default {
     data() {
         return {
             form: useForm({
-                client_id: null,
+                client_name: null,
+                phone_number: null,
                 address: null,
                 deposit_amount: null,
                 orderItems: []
@@ -168,11 +174,6 @@ export default {
         },
         removeOrderItem(index) {
             this.form.orderItems.splice(index, 1)
-        },
-        setClient(client) {
-            this.$refs.selectClients.refreshData();
-
-            this.form.client_id = parseInt(client.id)
         }
     }
 }

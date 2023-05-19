@@ -18,13 +18,6 @@
             />
         </div>
 
-        <div class="mb-3">
-            <SelectClients
-                auto-position
-                v-model="form.client"
-            />
-        </div>
-
         <div class="input-group">
             <AirDatePicker
                 :as-modal="isMobile"
@@ -63,7 +56,6 @@ import queryString from 'query-string';
 import {IconFilter, IconX} from "@tabler/icons-vue"
 import {size} from "lodash/collection";
 import TextInput from "../../Shared/Form/TextInput.vue";
-import SelectClients from "../../Shared/Form/SelectClients.vue";
 import BsModal from "../../Shared/BsModal.vue";
 import omit from "lodash/omit";
 
@@ -71,7 +63,6 @@ export default {
     name: "OrderFilters",
     components: {
         BsModal,
-        SelectClients,
         TextInput, IconFilter, AirDatePicker, Card, IconX, Link},
     data() {
         return {
@@ -79,7 +70,6 @@ export default {
             form: useForm({
                 created_start: null,
                 created_end: null,
-                client: null,
                 query: null,
             })
         }
@@ -96,7 +86,6 @@ export default {
             this.form.query = params['query']
             this.form.created_start = params['created_start']
             this.form.created_end = params['created_end']
-            this.form.client = params['client'] ? parseInt(params['client']) : null
         },
         submit() {
             this.form.get(route('orders.index'))

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
 use App\Models\Nomenclature;
 use App\Models\Supplier;
 
@@ -15,16 +14,6 @@ class AutocompleteController extends Controller
                 request('q'),
                 static fn($q, $v) => $q->where('name', 'like', '%' . $v . '%')
                     ->orWhereBarcode($v)
-            )->get()
-        );
-    }
-
-    public function clients()
-    {
-        return $this->transformCollection(
-            Client::when(
-                request('q'),
-                static fn($q, $v) => $q->where('name', 'like', '%' . $v . '%')
             )->get()
         );
     }
