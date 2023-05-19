@@ -1,7 +1,7 @@
 <template>
     <BsModal
         ref="modal"
-        title="Новый клиент"
+        title="Новый поставщик"
         with-btn
         centered
         @hidden="form.reset()"
@@ -10,27 +10,18 @@
         <template #btn="{show}">
             <div class="mt-2">
                 <button type="button" @click="show" class="btn btn-sm btn-link">
-                    <IconCirclePlus :size="18" class="me-1" stroke-width="1" />
-                    Новый клиент
+                    <IconCirclePlus :size="18" class="me-1" stroke-width="1"/>
+                    Новый поставщик
                 </button>
             </div>
         </template>
 
-        <div class="mb-3">
-            <TextInput
-                label="Имя"
-                label-required
-                placeholder="Введите имя"
-                v-model="form.name"
-                :invalid-text="form.errors.get('name')"
-            />
-        </div>
-
         <TextInput
-            label="Телефон"
-            placeholder="Введите номер телефона"
-            v-model="form.phone"
-            :invalid-text="form.errors.get('phone')"
+            label="Имя поставщика"
+            label-required
+            placeholder="Введите имя"
+            v-model="form.name"
+            :invalid-text="form.errors.get('name')"
         />
 
         <template #footer="{hide}">
@@ -54,7 +45,7 @@ import {IconCirclePlus} from "@tabler/icons-vue";
 
 export default {
     emits: ['success'],
-    name: "NewClientModal",
+    name: "NewSupplierModal",
     components: {IconCirclePlus, BsModal, TextInput},
     data() {
         return {
@@ -66,7 +57,7 @@ export default {
     methods: {
         async submit() {
             try {
-                const {data} = await this.form.post(route('clients.store', {modal: 1}))
+                const {data} = await this.form.post(route('suppliers.store', {modal: 1}))
 
                 this.$emit('success', data)
 
@@ -74,9 +65,9 @@ export default {
 
                 this.$refs.modal.hide()
 
-                useToast().success('Клиент успешно добавлен.')
+                useToast().success('Поставщик успешно добавлен.')
             } catch (e) {
-                useToast().error('Ошибка добавления нового клиента.')
+                useToast().error('Ошибка добавления нового поставщика.')
             }
         }
     }

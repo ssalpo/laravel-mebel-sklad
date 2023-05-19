@@ -3,6 +3,7 @@
         v-bind="$attrs"
         searchable
         prefetch
+        ref="selectSuppliers"
         remote
         :remote-url="route('autocomplete.suppliers')"
         full
@@ -14,6 +15,11 @@
 import CustomSelect from "./CustomSelect.vue";
 export default {
     name: "SelectSuppliers",
-    components: {CustomSelect}
+    components: {CustomSelect},
+    methods: {
+        refreshData() {
+            this.$refs.selectSuppliers.refreshData()
+        }
+    }
 }
 </script>

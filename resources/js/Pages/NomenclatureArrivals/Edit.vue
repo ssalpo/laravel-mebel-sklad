@@ -6,9 +6,12 @@
             <card>
                 <div class="col col-sm-6 offset-sm-3 mb-3">
                     <SelectSuppliers
+                        ref="selectSuppliers"
                         v-model="form.supplier_id"
                         :invalid-text="form.errors.supplier_id"
                     />
+
+                    <NewSupplierModal @success="refreshSupplier"/>
                 </div>
 
                 <div class="col col-sm-6 offset-sm-3 mb-3">
@@ -41,9 +44,11 @@
                 <template #cardFooter>
                     <div class="col col-sm-6 offset-sm-3">
                         <button :disabled="form.processing" type="submit" class="btn btn-primary me-2">
-                            {{nomenclatureArrival?.id ? 'Изменить' : 'Добавить'}}
+                            {{ nomenclatureArrival?.id ? 'Изменить' : 'Добавить' }}
                         </button>
-                        <Link :disabled="form.processing" :href="route('nomenclature-arrivals.index')" class="btn">Отменить</Link>
+                        <Link :disabled="form.processing" :href="route('nomenclature-arrivals.index')" class="btn">
+                            Отменить
+                        </Link>
                     </div>
                 </template>
             </card>
@@ -60,9 +65,11 @@ import NumericField from "../../Shared/Form/NumericField.vue";
 import AirDatePicker from "../../Shared/Form/AirDatePicker.vue";
 import SelectNomenclatures from "../../Shared/Form/SelectNomenclatures.vue";
 import SelectSuppliers from "../../Shared/Form/SelectSuppliers.vue";
+import NewSupplierModal from "../../Shared/Modals/NewSupplierModal.vue";
 
 export default {
     components: {
+        NewSupplierModal,
         SelectSuppliers,
         PageWrapper,
         SelectNomenclatures,
@@ -92,6 +99,13 @@ export default {
             }
 
             this.form.put(route('nomenclature-arrivals.update', this.nomenclatureArrival.id))
+        },
+        refreshSupplier(supplier) {
+            this.$refs.selectSuppliers.refreshData()
+
+            this.form.supplier_id = parseInt(supplier.id)
+
+            this.form.clearErrors()
         }
     }
 }

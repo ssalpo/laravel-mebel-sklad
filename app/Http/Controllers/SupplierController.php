@@ -30,7 +30,14 @@ class SupplierController extends Controller
 
     public function store(SupplierRequest $request)
     {
-        $this->supplierService->store($request->validated());
+        $supplier = $this->supplierService->store($request->validated());
+
+        if($request->has('modal')) {
+            return response()->json([
+                'id' => $supplier->id,
+                'name' => $supplier->name
+            ]);
+        }
 
         Toast::success('Поставщик успешно добавлена.');
 
