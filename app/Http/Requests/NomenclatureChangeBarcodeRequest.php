@@ -22,7 +22,7 @@ class NomenclatureChangeBarcodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|integer|unique:nomenclatures,barcode'
+            'code' => 'required|unique:nomenclatures,barcode'
         ];
     }
 }

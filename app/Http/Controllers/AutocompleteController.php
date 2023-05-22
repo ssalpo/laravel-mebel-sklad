@@ -14,7 +14,7 @@ class AutocompleteController extends Controller
             Nomenclature::when(
                 request('q'),
                 static fn($q, $v) => $q->where('name', 'like', '%' . $v . '%')
-                    ->orWhereBarcode($v)
+                    ->orWhere('barcode', 'like', '%' . $v . '%')
             )->get()
         );
     }
