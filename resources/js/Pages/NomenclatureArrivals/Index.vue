@@ -11,8 +11,10 @@
             </Link>
         </template>
 
+        <NomenclatureArrivalFilters class="mb-3"/>
+
         <card>
-            <EmptyResult v-if="!nomenclatureArrivals.data.length" />
+            <EmptyResult v-if="!nomenclatureArrivals.data.length"/>
 
             <NomenclatureItems
                 :items="nomenclatureArrivals.data"
@@ -34,9 +36,11 @@ import {IconCirclePlus} from "@tabler/icons-vue";
 import NomenclatureItems from "../../Shared/Mobile/NomenclatureItems.vue";
 import Card from "../../Shared/Card.vue";
 import EmptyResult from "../../Shared/EmptyResult.vue";
+import NomenclatureArrivalFilters from "./Filters.vue";
 
 export default {
     components: {
+        NomenclatureArrivalFilters,
         EmptyResult,
         Card,
         Pagination,
