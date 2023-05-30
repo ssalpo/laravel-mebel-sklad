@@ -16,8 +16,8 @@
         <card>
             <EmptyResult v-if="!nomenclatureArrivals.data.length"/>
 
-            <NomenclatureItems
-                :items="nomenclatureArrivals.data"
+            <NomenclatureOperationItems
+                :items="items"
             />
 
             <template #cardFooter v-if="nomenclatureArrivals.links.length > 3">
@@ -36,11 +36,13 @@ import {IconCirclePlus} from "@tabler/icons-vue";
 import NomenclatureItems from "../../Shared/Mobile/NomenclatureItems.vue";
 import Card from "../../Shared/Card.vue";
 import EmptyResult from "../../Shared/EmptyResult.vue";
+import NomenclatureOperationItems from "../../Shared/Mobile/NomenclatureOperationItems.vue";
 import NomenclatureArrivalFilters from "./Filters.vue";
 
 export default {
     components: {
         NomenclatureArrivalFilters,
+        NomenclatureOperationItems,
         EmptyResult,
         Card,
         Pagination,
@@ -50,6 +52,17 @@ export default {
         PageWrapper,
         Link
     },
-    props: ['nomenclatureArrivals']
+    props: ['nomenclatureArrivals'],
+    computed: {
+        items() {
+            return this.nomenclatureArrivals.data.map(item => ({
+                id: item.id,
+                title: item.nomenclature.name,
+                quantity: item.quantity,
+                unit: item.nomenclature.unit,
+                date: item.created_at_formatted
+            }))
+        }
+    }
 }
 </script>

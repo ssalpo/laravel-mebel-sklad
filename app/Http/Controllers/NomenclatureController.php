@@ -20,7 +20,9 @@ class NomenclatureController extends Controller
 
     public function index()
     {
-        $nomenclatures = Nomenclature::paginate(200)->onEachSide(0);
+        $nomenclatures = Nomenclature::orderBy('created_at', 'DESC')
+            ->paginate(200)
+            ->onEachSide(0);
 
         return inertia('Nomenclatures/Index', compact('nomenclatures'));
     }
@@ -37,6 +39,11 @@ class NomenclatureController extends Controller
         Toast::success('Товар успешно добавлен.');
 
         return to_route('nomenclatures.index');
+    }
+
+    public function show(Nomenclature $nomenclature)
+    {
+        return inertia('Nomenclatures/Show', compact('nomenclature'));
     }
 
     public function edit(int $id)

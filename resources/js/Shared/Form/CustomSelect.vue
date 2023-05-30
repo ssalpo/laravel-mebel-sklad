@@ -14,52 +14,52 @@
                 aria-expanded="false"
                 @click="toggleDropdown"
         >
-            <span v-if="selected">{{ selected }}</span>
-            <span v-if="!selected && placeholder" class="text-muted">{{ placeholder }}</span>
+            <span v-if="selected" class="text-truncate">{{ selected }}</span>
+            <span v-if="!selected && placeholder" class="text-muted text-truncate">{{ placeholder }}</span>
         </button>
 
         <!-- Dropdown wrapper -->
         <div class="dropdown-menu" :class="{show: autoPosition && isOpen}" :id="`dropdownMenu${uid}`"
-                 :aria-labelledby="`dropdownMenuButton${uid}`">
-                <!-- Search Input -->
+             :aria-labelledby="`dropdownMenuButton${uid}`">
+            <!-- Search Input -->
 
-                <div class="custom-select-search-input" :id="`dropdownInput${uid}`" v-if="searchable">
-                    <input type="text"
-                           @keyup="onSearch"
-                           ref="searchInput"
-                           class="form-control"
-                           placeholder="Найти"
-                    />
-                </div>
-
-                <!-- Not found text -->
-                <div
-                    class="dropdown-item disabled"
-                    v-if="!listOptions.length && !loading"
-                >
-                    Ничего не найдено
-                </div>
-
-                <!-- Loading indicator -->
-                <div
-                    class="dropdown-item disabled"
-                    v-if="loading"
-                >
-                    Загрузка...
-                </div>
-
-
-                <!-- List Item -->
-                <a class="dropdown-item"
-                   href="javascript:void(0)"
-                   v-if="!loading"
-                   v-for="option in listOptions"
-                   :class="activeStateClasses(option)"
-                   @click.prevent="onChange(option)"
-                >
-                    {{ option.text }}
-                </a>
+            <div class="custom-select-search-input" :id="`dropdownInput${uid}`" v-if="searchable">
+                <input type="text"
+                       @keyup="onSearch"
+                       ref="searchInput"
+                       class="form-control"
+                       placeholder="Найти"
+                />
             </div>
+
+            <!-- Not found text -->
+            <div
+                class="dropdown-item disabled"
+                v-if="!listOptions.length && !loading"
+            >
+                Ничего не найдено
+            </div>
+
+            <!-- Loading indicator -->
+            <div
+                class="dropdown-item disabled"
+                v-if="loading"
+            >
+                Загрузка...
+            </div>
+
+
+            <!-- List Item -->
+            <a class="dropdown-item"
+               href="javascript:void(0)"
+               v-if="!loading"
+               v-for="option in listOptions"
+               :class="activeStateClasses(option)"
+               @click.prevent="onChange(option)"
+            >
+                {{ option.text }}
+            </a>
+        </div>
     </div>
 
     <div class="invalid-feedback" v-if="invalidText && !withoutInvalidText">{{ invalidText }}</div>
@@ -131,7 +131,7 @@ export default {
 
             let modalDialog = menuElement.closest('.modal');
 
-            if(modalDialog !== null) {
+            if (modalDialog !== null) {
                 modalDialog.appendChild(menuElement)
             }
         },

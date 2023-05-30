@@ -1,19 +1,19 @@
 <template>
     <div class="divide-y">
         <div v-for="item in items">
-            <Link :href="route('nomenclatures.show', item.id)" class="text-decoration-none">
+            <Link :href="route('nomenclature-arrivals.show', item.id)" class="text-decoration-none">
                 <div class="row align-items-center">
                     <div class="col">
                         <div class="text-truncate text-dark">
-                            <strong>{{ item.name }}</strong>
+                            <strong>{{item.title}}</strong>
                         </div>
                         <div class="text-muted">
-                            <small>Себестоимость: {{ numberFormat(item.base_price) }} c.</small>
+                            <small>{{item.date}}</small>
                         </div>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto text-muted">
                         <span class="badge badge-outline text-green">
-                            <small>{{ numberFormat(item.price_for_sale) }} c.</small>
+                            {{item.quantity}} {{item.unit}}
                         </span>
                     </div>
                 </div>
@@ -24,11 +24,9 @@
 
 <script>
 import {Link} from "@inertiajs/inertia-vue3";
-import {numberFormat} from "../../functions";
 
 export default {
-    name: "NomenclatureItems",
-    methods: {numberFormat},
+    name: "NomenclatureOperationItems",
     components: {Link},
     props: ['items']
 }

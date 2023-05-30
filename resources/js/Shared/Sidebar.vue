@@ -8,19 +8,20 @@
             </button>
 
             <h1 class="navbar-brand navbar-brand-autodark d-none d-sm-inline-flex" style="font-size: 18px">
-                <IconBuilding :size="28" class="me-2" stroke-width="2" />
+                <IconBuilding :size="28" class="me-2" stroke-width="2"/>
                 Мебель 777
             </h1>
 
             <div class="navbar-nav flex-row d-lg-none">
                 <div class="nav-item me-3">
                     <Link :href="route('orders.index')" class="btn btn-icon btn-outline-light px-2">
-                        <IconListDetails :size="18" class="me-1" stroke-width="1.7" /> Продажи
+                        <IconListDetails :size="18" class="me-1" stroke-width="1.7"/>
+                        Продажи
                     </Link>
                 </div>
                 <div class="nav-item">
                     <Link :href="route('orders.create')" class="btn btn-icon btn-success">
-                        <IconShoppingCartPlus :size="18" stroke-width="1.7" />
+                        <IconShoppingCartPlus :size="18" stroke-width="1.7"/>
                     </Link>
                 </div>
             </div>
@@ -91,7 +92,7 @@
                                 <IconList :size="24" stroke-width="1.5"/>
                               </span>
 
-                              <span class="nav-link-title">
+                            <span class="nav-link-title">
                                 Справочники
                               </span>
                         </a>
@@ -102,7 +103,7 @@
                                     <Link class="dropdown-item"
                                           :class="{active: $page.component.startsWith('Nomenclatures')}"
                                           :href="route('nomenclatures.index')">
-                                        Товар
+                                        Товары
                                     </Link>
                                     <Link class="dropdown-item"
                                           :class="{active: $page.component.startsWith('Suppliers')}"
